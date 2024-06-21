@@ -1,0 +1,41 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+.menu-icons i {
+    margin-left: 20px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 5px 10px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    padding: 5px;
+    border-radius: 20px;
+}
+
+.search-bar button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.search-bar i {
+    color: #888;
+}
+

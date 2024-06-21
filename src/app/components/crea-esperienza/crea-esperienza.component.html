@@ -1,0 +1,51 @@
+
+<h2>Crea Esperienza</h2>
+
+<!-- Form per la creazione di una nuova esperienza -->
+<form (ngSubmit)="creaEsperienza()" class="experience-form">
+  <label for="titolo">Titolo:</label>
+  <input type="text" [(ngModel)]="nuovaEsperienza.titolo" name="titolo" id="titolo" required>
+  
+  <label for="descrizione">Descrizione:</label>
+  <textarea [(ngModel)]="nuovaEsperienza.descrizione" name="descrizione" id="descrizione" required></textarea>
+
+  <label for="luogo">Luogo:</label>
+  <input type="text" [(ngModel)]="nuovaEsperienza.luogo" name="luogo" id="luogo">
+  
+  <label for="dataInizio">Data Inizio:</label>
+  <input type="text" [(ngModel)]="nuovaEsperienza.dataInizio" name="dataInizio" id="dataInizio">
+
+  <label for="dataFine">Data Fine:</label>
+  <input type="text" [(ngModel)]="nuovaEsperienza.dataFine" name="dataFine" id="dataFine">
+  
+  <label for="ora">Ora:</label>
+  <input type="text" [(ngModel)]="nuovaEsperienza.ora" name="ora" id="ora">
+  
+  <label for="durata">Durata:</label>
+  <input type="text" [(ngModel)]="nuovaEsperienza.durata" name="durata" id="durata">
+
+  <label for="programma">Programma:</label>
+  <textarea [(ngModel)]="nuovaEsperienza.programma" name="programma" id="programma"></textarea>
+  
+  <label for="prezzo">Prezzo:</label>
+  <input type="text" [(ngModel)]="nuovaEsperienza.prezzo" name="prezzo" id="prezzo">
+  
+  <label for="postiEsperienza">Posti Esperienza:</label>
+  <input type="text" [(ngModel)]="nuovaEsperienza.postiEsperienza" name="postiEsperienza" id="postiEsperienza">
+  
+  <label for="puntiEsperienza">Punti Esperienza:</label>
+  <input type="text" [(ngModel)]="nuovaEsperienza.puntiEsperienza" name="puntiEsperienza" id="puntiEsperienza">
+  
+  <label for="categoria">Categoria:</label>
+  <input type="text" [(ngModel)]="nuovaEsperienza.categoria" name="categoria" id="categoria">
+
+  <!-- Per il caricamento di foto -->
+  <label for="foto">Carica Foto:</label>
+  <input type="file" (change)="gestisciFotoSelezionate($event)" id="foto" accept="foto/*" multiple>
+
+  <!-- Per il caricamento di video -->
+  <label for="video">Carica Video:</label>
+  <input type="file" (change)="gestisciVideoSelezionati($event)" id="video" accept="video/*" multiple>
+
+  <button type="submit" class="submit-button">Crea Esperienza</button>
+</form>

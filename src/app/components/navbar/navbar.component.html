@@ -1,0 +1,34 @@
+<nav class="navbar">
+    <div class="navbar-left">
+        <div class="logo">
+            <img src="assets/logo.png" alt="Logo">
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" [routerLink]="['/prenotazioni']">Mie prenotazioni</a>
+        </div>
+    </div>
+    
+    <ul class="navbar-nav ms-auto d-flex flex-row">
+        <ng-container *ngIf="isLoggedIn(); else notLoggedIn">
+            <div class="menu-container" (click)="toggleDropdown()">
+                <i class="bi bi-person-circle menu-icon"></i>
+                <div class="dropdown-menu" [class.show]="isDropdownVisible">
+                    <a class="dropdown-item" [routerLink]="['/']">Home</a>
+                    <a class="dropdown-item" [routerLink]="['/profilo']">Profilo</a>
+                    <a class="dropdown-item" [routerLink]="['/crea-esperienza']">Crea esperienza</a>
+                    <a class="dropdown-item" [routerLink]="['/modifica-esperienza']">Modifica esperienza</a>
+                    <a class="dropdown-item" (click)="logout()">Logout</a>
+                </div>
+            </div>
+        </ng-container>
+        <ng-template #notLoggedIn>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/login']">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/signup']">Signup</a>
+            </li>
+        </ng-template>
+    </ul>
+    
+</nav>

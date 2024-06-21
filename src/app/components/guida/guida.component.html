@@ -1,0 +1,31 @@
+<div class="container mt-5">
+    <div class="left-column mr-5">
+        <div class="profile-card">
+            <img class="profile-pic" src="{{guida.foto}}" alt="Foto della Guida">
+            <div class="profile-info">
+                <h1>{{guida.nome}} {{guida.cognome}}</h1>
+                <p class="role">Guida</p>
+                <p>3511 Recensioni</p>
+                <p>4.98 Valutazione</p>
+                <p>{{guida.anniEsperienza}} anni da guida</p>
+                <button class="contact-button">Contatta la guida</button>
+            </div>
+        </div>
+    </div>
+    <div class="right-column">
+        <div class="details">
+            <h2>Informazioni sulla Guida</h2>
+            <p><strong>Il mio lavoro:</strong> TOUR OPERATOR</p>
+            <p><strong>Lingue parlate:</strong> {{guida.lingue}}</p>
+            <p><strong>Chi sono:</strong> {{guida.descrizione}}</p>
+        </div>
+        <div class="verified-info">
+            <h2>Informazioni confermate della Guida</h2>
+            <ul>
+                <li>Identità</li>
+                <li>Indirizzo email</li>
+                <li>Numero di telefono</li>
+            </ul>
+        </div>
+    </div>
+</div>

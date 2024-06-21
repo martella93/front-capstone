@@ -1,0 +1,136 @@
+<div *ngIf="esperienza">
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card" style="border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+          <div id="experienceCarousel{{esperienza.id}}" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button *ngFor="let image of esperienza.foto; let i = index" type="button"
+                [attr.data-bs-target]="'#experienceCarousel' + esperienza.id" [attr.data-bs-slide-to]="i"
+                [class.active]="i === 0" aria-current="true" [attr.aria-label]="'Slide ' + (i + 1)">
+              </button>
+            </div>
+            <div class="carousel-inner">
+              <div *ngFor="let image of esperienza.foto; let i = index" class="carousel-item" [class.active]="i === 0">
+                <img [src]="image" class="d-block w-100" alt="Experience Image {{ i + 1 }}"
+                  style="border-top-left-radius: 10px; border-top-right-radius: 10px; height: 600px;">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button"
+              [attr.data-bs-target]="'#experienceCarousel' + esperienza.id" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button"
+              [attr.data-bs-target]="'#experienceCarousel' + esperienza.id" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h1 class="card-title mb-0">{{ esperienza.titolo }}</h1>
+              <div>
+                <i class="bi bi-bookmark" style="font-size: 1.5em; color: #333;"></i>
+              </div>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+              <div class="d-flex align-items-center">
+                <span class="text-warning me-1" style="font-size: 1.2em;">★</span>
+                <span class="fw-bold me-1">4.4</span>
+                <span class="text-muted">· 30 Ratings</span>
+              </div>
+            </div>
+            <p class="card-text text-muted"><i class="bi bi-geo-alt"></i> {{ esperienza.luogo }}</p>
+            <h5>Descrizione</h5>
+            <p class="card-text">{{ esperienza.descrizione }}</p>
+            <div class="d-flex align-items-center mb-2">
+              <i class="bi bi-clock me-2"></i>
+              <span>Duration: {{ esperienza.durata }} hours</span>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+              <i class="bi bi-x-circle me-2"></i>
+              <span>Cancellation: 1 day <a href="#">learn more</a></span>
+            </div>
+            <div>
+              <h5 class="mt-4">Programma</h5>
+              <p class="card-text">{{ esperienza.programma }}</p>
+            </div>
+            <div>
+              <h5 class="mt-4">Luogo</h5>
+              <p class="card-text">{{ esperienza.luogo }}</p>
+            </div>
+            <!-- Modulo di Recensione -->
+            <h5 class="mt-4">Lascia una Recensione</h5>
+            <form (submit)="creaRecensione(esperienza.id, recensione)">
+              <div class="mb-3">
+                <label for="recensioneTesto" class="form-label">Testo della Recensione</label>
+                <textarea id="recensioneTesto" class="form-control" [(ngModel)]="recensione.commento" name="testo"
+                  required></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="recensioneRating" class="form-label">Valutazione</label>
+                <select id="recensioneRating" class="form-control" [(ngModel)]="recensione.valutazione" name="rating" required>
+                  <option [value]="1">1</option>
+                  <option [value]="2">2</option>
+                  <option [value]="3">3</option>
+                  <option [value]="4">4</option>
+                  <option [value]="5">5</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary">Invia Recensione</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <!-- Card della guida -->
+        <div class="card" style="border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+          <div class="card-body text-center">
+            <img src="path/to/guide-photo.jpg" alt="Guida" class="rounded-circle mb-3" style="width: 100px; height: 100px;">
+            <h5 class="card-title">Ciao sono {{guida.nome}}</h5>
+            <p class="card-text">{{guida.descrizione}}</p>
+            <p class="text-warning mb-1" style="font-size: 1.2em;">★★★★★</p>
+            <p class="card-text text-muted">80 recensioni</p>
+            <a [routerLink]="['/guida', guida.id]" class="btn btn-primary">Vedi l'agenzia locale</a>
+          </div>
+        </div>
+        <!-- Selezione data e ospiti -->
+        <div class="card mt-4" style="border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+          <div class="card-body">
+            <h5 class="card-title">Select Date and Tickets</h5>
+            <div class="mb-3">
+              <label for="postiEsperienza" class="form-label">Posti Disponibili</label>
+              <p id="postiEsperienza" class="card-text">{{ esperienza.postiEsperienza }}</p>
+            </div>
+            <div class="mb-3">
+              <label for="puntiEsperienza" class="form-label">Punti Esperienza</label>
+              <p id="puntiEsperienza" class="card-text">{{ esperienza.puntiEsperienza }}</p>
+            </div>
+            <div class="mb-3">
+              <label for="prezzo" class="form-label">Prezzo</label>
+              <p id="prezzo" class="card-text">{{ esperienza.prezzo | currency:'EUR':'symbol':'1.2-2' }}</p>
+            </div>
+            <div class="mb-3">
+              <label for="datePicker" class="form-label">Select Date</label>
+              <div class="datepicker-container">
+                <input type="text" id="datePicker" class="form-control bs-datepicker-form-control" [(ngModel)]="selectedDate" bsDatepicker>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="oraPicker" class="form-label">Select Time</label>
+              <input type="time" id="oraPicker" class="form-control" [(ngModel)]="selectedTime" required>
+            </div>
+            <div class="mb-3">
+              <label for="postiDaPrenotare" class="form-label">Posti da Prenotare</label>
+              <input type="number" id="postiDaPrenotare" class="form-control" [(ngModel)]="postiDaPrenotare" name="postiDaPrenotare" required>
+            </div>
+            <button class="btn btn-primary" (click)="prenotaEsperienza(esperienza.id, prenotazione)">Book Now</button>
+          </div>
+        </div>
+        
+        
+      </div>
+    </div>
+  </div>
+</div>
