@@ -10,14 +10,21 @@ import { PrenotazioneService } from 'src/app/service/prenotazione.service';
   styleUrls: ['./esperienza-details.component.scss'],
 })
 export class EsperienzaDetailsComponent implements OnInit {
-  esperienza: any;
+ 
   guida: any = { nome: '', cognome: '', descrizione: '', lingue: '', anniEsperienza: '' };
   prenotazione: any[] = [];
-  selectedDate: Date = new Date();
+  
   selectedEsperienza: any;
   postiPrenotati: number | undefined;
+ 
+  
+  date: string | undefined;
+  esperienza: any; // Oggetto dell'esperienza corrente
+  selectedDate: Date = new Date(); // Data selezionata
+  selectedTime: string = ''; // Ora selezionata
   postiDaPrenotare: number | undefined;
-  selectedTime: string | undefined; 
+  errorMessage: string | undefined; // Eventuale messaggio di errore
+  successMessage: string | undefined;
 
   recensione = {
     commento: '',
@@ -38,8 +45,7 @@ export class EsperienzaDetailsComponent implements OnInit {
         this.dataService.getEsperienzaById(id).subscribe(
           (data) => {
             this.esperienza = data;
-            this.caricaGuida(this.esperienza.id); // Carica la guida associata all'esperienza
-            this.caricaPostiPrenotati(); // Carica i posti prenotati all'inizio
+            this.caricaGuida(this.esperienza.id); 
           },
           (error) => {
             console.error(`Errore durante il recupero dell'esperienza con ID ${id}`, error);
@@ -95,17 +101,33 @@ export class EsperienzaDetailsComponent implements OnInit {
   }
 
   // Metodo per prenotare l'esperienza
- prenotaEsperienza(esperienzaId: number, prenotazione: any): void {
-    this.prenotazioneSrv.prenotaEsperienza(esperienzaId, prenotazione).subscribe(
+  prenotaEsperienza(): void {
+    if (!this.selectedDate || !this.selectedTime || !this.postiDaPrenotare) {
+      this.errorMessage = 'Per favore, completa tutti i campi.';
+      return;
+    }
+
+    const prenotazione = {
+      data: this.selectedDate.toISOString().substring(0, 10), // Converte la data in formato ISO yyyy-mm-dd
+      ora: this.selectedTime,
+      postiPrenotati: this.postiDaPrenotare,
+      dataPrenotazione: new Date().toISOString() // Inizializza la data di prenotazione in formato ISO
+    };
+
+    // Invia la prenotazione al servizio PrenotazioneService
+    this.prenotazioneSrv.prenotaEsperienza(this.esperienza.id, prenotazione).subscribe(
       (response) => {
         console.log('Prenotazione effettuata con successo', response);
-        // Aggiungi la prenotazione alla lista delle prenotazioni se necessario
-        // Esegui altre operazioni necessarie dopo la prenotazione
+        this.successMessage = 'Prenotazione effettuata con successo!';
+        this.errorMessage = undefined; // Pulisce eventuali errori precedenti
       },
       (error) => {
         console.error('Errore nella prenotazione', error);
+        this.errorMessage = 'Errore durante la prenotazione. Per favore, riprova più tardi.';
+        this.successMessage = undefined; // Pulisce eventuali messaggi di successo precedenti
       }
     );
   }
-
+  
+  
 }

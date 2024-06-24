@@ -31,6 +31,10 @@ private localhost = 'http://localhost:8080';
     return this.http.get<any[]>(`${this.localhost}/api/favoriti`);
   }
 
+  getFavoritiByLoggedUser(): Observable<any> {
+    return this.http.get<any>(`${this.localhost}/api/favoriti/loggedUser`);
+  }
+
   aggiungiAiPreferiti(id: number): Observable<string> {
     return this.http.post<string>(`${this.localhost}/api/favoriti/add/${id}`, null, { responseType: 'text' as 'json' });
   }
@@ -56,6 +60,10 @@ private localhost = 'http://localhost:8080';
   }
   deleteRecensione(id: number): Observable<any> {
     return this.http.delete(`${this.localhost}/api/recensione/${id}`);
+  }
+
+  getUserLogged(): Observable<any> {
+    return this.http.get<any>(`${this.localhost}/api/userLogged`);
   }
  
  

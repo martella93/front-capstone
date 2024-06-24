@@ -15,38 +15,38 @@ export class EsperienzaComponent {
   constructor(private dataService: DataServiceService) { }
 
   ngOnInit(): void {
-    this.caricaFavoriti();
+    this.caricaPreferiti();
   }
 
-  caricaFavoriti(): void {
-    this.dataService.getFavoriti().subscribe(
-      (data) => {
-        this.preferiti = data;
+  caricaPreferiti(): void {
+    this.dataService.getFavoritiByLoggedUser().subscribe(
+      (preferitiIds: number[]) => {
+        this.preferiti = preferitiIds;
       },
-      (error) => {
-        console.error('Errore nel caricamento dei preferiti', error);
+      error => {
+        console.error('Errore nel recupero dei preferiti', error);
       }
     );
   }
-  
+
   togglePreferito(esperienza: any): void {
     const index = this.preferiti.indexOf(esperienza.id);
     if (index !== -1) {
       this.dataService.rimuoviDaiPreferiti(esperienza.id).subscribe(
         () => {
           console.log(`Rimosso dai preferiti: ${esperienza.id}`);
-          this.preferiti.splice(index, 1);
+          this.preferiti.splice(index, 1); // Rimuovi l'ID dalla lista dei preferiti
         },
         error => {
           console.error('Errore nella rimozione dai preferiti', error);
         }
       );
     } else {
-      console.log(`Aggiungi ai preferiti URL: http://localhost:8080/favoriti/add/${esperienza.id}`);
+      console.log(`Aggiungi ai preferiti: ${esperienza.id}`);
       this.dataService.aggiungiAiPreferiti(esperienza.id).subscribe(
         () => {
           console.log(`Aggiunto ai preferiti: ${esperienza.id}`);
-          this.preferiti.push(esperienza.id);
+          this.preferiti.push(esperienza.id); // Aggiungi l'ID alla lista dei preferiti
         },
         error => {
           console.error('Errore nell\'aggiunta ai preferiti', error);
@@ -54,10 +54,11 @@ export class EsperienzaComponent {
       );
     }
   }
-  
 
   isPreferito(esperienza: any): boolean {
     return this.preferiti.includes(esperienza.id);
   }
+  
 
+ 
 }

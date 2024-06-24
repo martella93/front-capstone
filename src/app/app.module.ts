@@ -17,7 +17,6 @@ import { TokenInterceptor } from './auth/token.interceptor';
 import { AuthService } from './auth/auth.service';
 import { EsperienzaComponent } from './components/esperienza/esperienza.component';
 import { EsperienzaDetailsComponent } from './components/esperienza-details/esperienza-details.component';
-import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { GuidaComponent } from './components/guida/guida.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { CreaEsperienzaComponent } from './components/crea-esperienza/crea-esperienza.component';
@@ -33,11 +32,11 @@ const routes: Route[] = [
   { path: 'dettaglio-esperienza/:id', component: EsperienzaDetailsComponent },
   { path: 'favoriti', component: FavoritiComponent },
   { path: 'guida/:id', component: GuidaComponent},
-  { path: 'user-details', component: UserDetailsComponent},
   { path: 'profilo', component: ProfiloComponent},
   { path: 'crea-esperienza', component: CreaEsperienzaComponent},
   { path: 'modifica-esperienza', component: ModificaEsperienzaComponent},
-  { path: 'prenotazioni', component: PrenotazioniComponent}
+  { path: 'prenotazioni', component: PrenotazioniComponent},
+  { path: 'preferiti', component: FavoritiComponent}
 
 ];
 
@@ -51,7 +50,6 @@ const routes: Route[] = [
     SignupComponent,
     EsperienzaComponent,
     EsperienzaDetailsComponent,
-    UserDetailsComponent,
     GuidaComponent,
     NavbarComponent,
     CreaEsperienzaComponent,

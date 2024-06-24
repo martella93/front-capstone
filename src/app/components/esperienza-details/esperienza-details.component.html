@@ -111,21 +111,28 @@
               <label for="prezzo" class="form-label">Prezzo</label>
               <p id="prezzo" class="card-text">{{ esperienza.prezzo | currency:'EUR':'symbol':'1.2-2' }}</p>
             </div>
-            <div class="mb-3">
-              <label for="datePicker" class="form-label">Select Date</label>
-              <div class="datepicker-container">
-                <input type="text" id="datePicker" class="form-control bs-datepicker-form-control" [(ngModel)]="selectedDate" bsDatepicker>
+            <form (ngSubmit)="prenotaEsperienza()">
+              <div class="mb-3">
+                <label for="datePicker" class="form-label">Seleziona Data</label>
+                <div class="datepicker-container">
+                  <input type="text" id="datePicker" class="form-control" placeholder="Seleziona la data" bsDatepicker
+                    [(ngModel)]="selectedDate" name="selectedDate" required>
+                </div>
               </div>
-            </div>
-            <div class="mb-3">
-              <label for="oraPicker" class="form-label">Select Time</label>
-              <input type="time" id="oraPicker" class="form-control" [(ngModel)]="selectedTime" required>
-            </div>
-            <div class="mb-3">
-              <label for="postiDaPrenotare" class="form-label">Posti da Prenotare</label>
-              <input type="number" id="postiDaPrenotare" class="form-control" [(ngModel)]="postiDaPrenotare" name="postiDaPrenotare" required>
-            </div>
-            <button class="btn btn-primary" (click)="prenotaEsperienza(esperienza.id, prenotazione)">Book Now</button>
+          
+              <div class="mb-3">
+                <label for="oraPicker" class="form-label">Seleziona Ora</label>
+                <input type="time" id="oraPicker" class="form-control" [(ngModel)]="selectedTime" name="selectedTime" required>
+              </div>
+          
+              <div class="mb-3">
+                <label for="postiDaPrenotare" class="form-label">Posti da Prenotare</label>
+                <input type="number" id="postiDaPrenotare" class="form-control" [(ngModel)]="postiDaPrenotare" name="postiDaPrenotare"
+                  required>
+              </div>
+          
+              <button type="submit" class="btn btn-primary">Prenota</button>
+            </form>
           </div>
         </div>
         
@@ -134,3 +141,5 @@
     </div>
   </div>
 </div>
+
+

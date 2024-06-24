@@ -1,0 +1,46 @@
+/* Stili per il contenitore principale dell'utente */
+.user-profile {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Stili per l'header con il nome dell'utente */
+  .user-profile h2 {
+    color: #333;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+  }
+  
+  /* Stili per la lista delle informazioni utente */
+  .user-info ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .user-info li {
+    margin-bottom: 10px;
+  }
+  
+  .user-info li strong {
+    font-weight: bold;
+  }
+  
+  /* Stili per il messaggio quando nessun utente è loggato */
+  .no-user {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .no-user p {
+    color: #333;
+  }
+  
+  

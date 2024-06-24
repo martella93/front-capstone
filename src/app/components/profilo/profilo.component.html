@@ -1,1 +1,21 @@
-<p>profilo works!</p>
+<div class="user-profile" *ngIf="loggedUser">
+  <h2>Dettagli Utente</h2>
+  <div class="user-info">
+    <ul>
+      <li><strong>Username:</strong> {{ loggedUser.username }}</li>
+      <li><strong>Email:</strong> {{ loggedUser.email }}</li>
+      <li *ngIf="loggedUser.role !== 'ADMIN'"><strong>Punti Guadagnati:</strong> {{ loggedUser.puntiGuadagnati }}</li>
+      <li><strong>Ruolo:</strong> {{ loggedUser.role }}</li>
+      <li><strong>Abilitato:</strong> {{ loggedUser.enabled ? 'Sì' : 'No' }}</li>
+    </ul>
+    
+  </div>
+</div>
+
+<div class="no-user" *ngIf="!loggedUser">
+  <p>Nessun utente loggato.</p>
+</div>
+
+
+
+

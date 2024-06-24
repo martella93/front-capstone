@@ -12,14 +12,16 @@ export class HomeComponent {
   searchTerm: any;
   filteredEsperienze: any[] = [];
   esperienze: any[] = [];
-  preferiti: number[] = [];
+  favoriti: number[] = [];
+  userId: number | null | undefined;
  
   
 
   constructor(private authSrv: AuthService, private dataService: DataServiceService ,private router: Router) { }
 
   ngOnInit(): void {
-    this.caricaEsperienze(); // Chiamata per caricare tutte le esperienze all'avvio del componente
+    this.caricaEsperienze(); 
+   
 
   }
  
@@ -68,6 +70,7 @@ export class HomeComponent {
       }
     );
   }
- 
+
+
  
 }
