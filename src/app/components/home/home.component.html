@@ -1,5 +1,13 @@
-<div class="search-bar">
-    <input type="text" placeholder="Cerca per luogo..." [(ngModel)]="searchTerm" (input)="onSearchInput()">
-    <button type="button" (click)="cercaPerLuogo()"><i class="bi bi-search"></i></button>
-</div>
+
+<header class="header-container">
+    <h1>Dove vuoi andare?</h1>
+    <div class="search-bar">
+        <input type="text" id="search-bar" placeholder="Cerca per luogo.." [(ngModel)]="searchTerm" (input)="onSearchInput()">
+        <button type="button" (click)="cercaPerLuogo()">Ricerca</button>
+    </div>
+</header>
+
+
+
+
 <app-esperienza [esperienze]="filteredEsperienze"></app-esperienza>

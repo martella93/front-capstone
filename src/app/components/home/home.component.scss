@@ -4,38 +4,54 @@ body {
     padding: 0;
 }
 
+h1 {
+    font-size: 3rem;
+    margin-top: 10px;
+}
+
 
 .menu-icons i {
     margin-left: 20px;
     font-size: 20px;
     cursor: pointer;
 }
+
+
+.header-container {
+    display: flex;
+    flex-direction: column; /* Imposta la direzione dei figli in colonna */
+    align-items: center; /* Centra gli elementi orizzontalmente */
+    padding: 20px; /* Aggiungi padding per migliorare lo spaziamento */
+    background-color: white; /* Colore di sfondo per il header */
+}
+
 .search-bar {
     display: flex;
-    align-items: center;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    padding: 5px 10px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    align-items: center; /* Centra gli elementi della search bar */
+    margin-top: 10px; /* Aggiungi margine superiore per separare dall'h1 */
 }
 
 .search-bar input {
-    border: none;
-    outline: none;
-    padding: 5px;
-    border-radius: 20px;
+    padding: 10px; /* Aggiungi padding per migliorare l'aspetto */
+    margin-right: 10px; /* Margine a destra per separare l'input dal pulsante */
+    border-radius: 10px; /* Angoli arrotondati per l'input */
+    border: 1px solid #ccc; /* Aggiungi un bordo sottile */
+    width: 500px; /* Larghezza fissa dell'input */
 }
 
 .search-bar button {
-    background: none;
-    border: none;
-    cursor: pointer;
+    padding: 10px 20px; /* Padding per il pulsante */
+    background-color: #007bff; /* Colore di sfondo del pulsante */
+    color: white; /* Colore del testo del pulsante */
+    border: none; /* Rimuovi il bordo del pulsante */
+    border-radius: 5px; /* Angoli arrotondati per il pulsante */
+    cursor: pointer; /* Cambia il cursore al passaggio del mouse */
 }
 
-.search-bar i {
-    color: #888;
+.search-bar button:hover {
+    background-color: #0056b3; /* Cambia il colore di sfondo al passaggio del mouse */
 }
+
+
+
 

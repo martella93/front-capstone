@@ -27,64 +27,13 @@
     font-size: 1.2em;
      color:#777;
   }
- /* Stili per il datepicker */
-.datepicker-container .bs-datepicker {
-  width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+ 
+.recensione-rating .bi-star-fill,
+.recensione-rating .bi-star {
+  color: yellow;
+  font-size: 16px; /* Adjust the size as needed */
 }
 
-.datepicker-container .bs-datepicker .bs-datepicker-body {
-  background-color: #ffffff;
-}
-
-.datepicker-container .bs-datepicker .bs-datepicker-head,
-.datepicker-container .bs-datepicker .bs-datepicker-footer {
-  background-color: #f8f9fa;
-}
-
-.datepicker-container .bs-datepicker .bs-datepicker-days tr td,
-.datepicker-container .bs-datepicker .bs-datepicker-days tr th {
-  padding: 0.75rem;
-  font-size: 1rem;
-}
-
-.datepicker-container .bs-datepicker .bs-datepicker-days tr td {
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
-
-.datepicker-container .bs-datepicker .bs-datepicker-days tr td:hover {
-  background-color: #e9ecef;
-}
-
-.datepicker-container .bs-datepicker .bs-datepicker-days tr td.selected,
-.datepicker-container .bs-datepicker .bs-datepicker-days tr td.selected:hover {
-  background-color: #007bff;
-  color: #ffffff;
-}
-
-.datepicker-container .bs-datepicker .bs-datepicker-days tr td.disabled,
-.datepicker-container .bs-datepicker .bs-datepicker-days tr td.disabled:hover {
-  background-color: #f8f9fa;
-  color: #6c757d;
-}
-
-.datepicker-container .bs-datepicker .bs-datepicker-nav-button {
-  color: #007bff;
-}
-
-.datepicker-container .bs-datepicker .bs-datepicker-nav-button:hover {
-  background-color: #e9ecef;
-}
-
-.datepicker-container .bs-datepicker .bs-datepicker-days tr th {
-  color: #6c757d;
-  font-weight: 500;
-}
-
-.datepicker-container .bs-datepicker .bs-datepicker-footer {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5rem 1rem;
+.recensione p {
+  font-style: italic;
 }

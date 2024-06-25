@@ -13,6 +13,8 @@ export class EsperienzaDetailsComponent implements OnInit {
  
   guida: any = { nome: '', cognome: '', descrizione: '', lingue: '', anniEsperienza: '' };
   prenotazione: any[] = [];
+  recensioni: any[] = [];
+  esperienzaId: number | undefined ;
   
   selectedEsperienza: any;
   postiPrenotati: number | undefined;
@@ -42,10 +44,12 @@ export class EsperienzaDetailsComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if (id) {
+        this.esperienzaId = +id;
         this.dataService.getEsperienzaById(id).subscribe(
           (data) => {
             this.esperienza = data;
             this.caricaGuida(this.esperienza.id); 
+            this.getRecensioni();
           },
           (error) => {
             console.error(`Errore durante il recupero dell'esperienza con ID ${id}`, error);
@@ -130,4 +134,20 @@ export class EsperienzaDetailsComponent implements OnInit {
   }
   
   
+  getRecensioni(): void {
+    if (this.esperienzaId !== undefined) {
+      this.dataService.getRecensioniByEsperienza(this.esperienzaId).subscribe(
+        (data: any[]) => {
+          console.log('Recensioni ricevute:', data); // Log dei dati ricevuti
+          this.recensioni = data;
+        },
+        (error) => {
+          console.error('Errore nel recupero delle recensioni', error); // Log degli errori
+          this.errorMessage = 'Errore nel recupero delle recensioni';
+        }
+      );
+    } else {
+      console.error('esperienzaId is undefined');
+    }
+  }
 }

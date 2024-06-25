@@ -6,7 +6,7 @@ import { DataServiceService } from 'src/app/service/data-service.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
   searchTerm: any;
@@ -14,17 +14,16 @@ export class HomeComponent {
   esperienze: any[] = [];
   favoriti: number[] = [];
   userId: number | null | undefined;
- 
-  
 
-  constructor(private authSrv: AuthService, private dataService: DataServiceService ,private router: Router) { }
+  constructor(
+    private authSrv: AuthService,
+    private dataService: DataServiceService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.caricaEsperienze(); 
-   
-
+    this.caricaEsperienze();
   }
- 
 
   isLoggedIn(): boolean {
     return this.authSrv.getToken() !== null;
@@ -45,10 +44,10 @@ export class HomeComponent {
   cercaPerLuogo(): void {
     if (this.searchTerm.trim() !== '') {
       this.dataService.cercaPerLuogo(this.searchTerm).subscribe(
-        data => {
+        (data) => {
           this.filteredEsperienze = data; // Assegniamo i risultati filtrati a filteredEsperienze
         },
-        error => {
+        (error) => {
           console.error('Errore nella ricerca per luogo', error);
         }
       );
@@ -61,16 +60,13 @@ export class HomeComponent {
   private caricaEsperienze(): void {
     // Esempio di caricamento iniziale delle esperienze
     this.dataService.getEsperienze().subscribe(
-      data => {
+      (data) => {
         this.esperienze = data;
         this.filteredEsperienze = data; // Inizialmente, filteredEsperienze contiene tutte le esperienze
       },
-      error => {
+      (error) => {
         console.error('Errore nel caricamento delle esperienze', error);
       }
     );
   }
-
-
- 
 }

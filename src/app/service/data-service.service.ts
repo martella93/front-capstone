@@ -52,7 +52,7 @@ private localhost = 'http://localhost:8080';
   }
 
   createRecensione(esperienzaId: number, recensione: any): Observable<string> {
-    return this.http.post<string>(`${this.localhost}/api/recensione/${esperienzaId}`, recensione);
+    return this.http.post<string>(`${this.localhost}/api/recensione/${esperienzaId}`, recensione, { responseType: 'text' as 'json' });
   }
 
   updateRecensione(id: number, recensione: any): Observable<any> {
@@ -60,6 +60,9 @@ private localhost = 'http://localhost:8080';
   }
   deleteRecensione(id: number): Observable<any> {
     return this.http.delete(`${this.localhost}/api/recensione/${id}`);
+  }
+  getRecensioniByEsperienza(id: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.localhost}/api/recensione/${id}`);
   }
 
   getUserLogged(): Observable<any> {

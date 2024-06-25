@@ -8,7 +8,6 @@ import { DataServiceService } from 'src/app/service/data-service.service';
 })
 export class FavoritiComponent {
   favoriti: any[] = [];
-  userId: number | null = null; // Rimuovi l'ID statico e usane uno dinamico
   errorMessage: string | null = null;
 
   constructor(private dataService: DataServiceService) { }

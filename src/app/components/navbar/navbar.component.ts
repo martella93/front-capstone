@@ -6,23 +6,20 @@ import { DataServiceService } from 'src/app/service/data-service.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-
-  searchTerm: any;
-  filteredEsperienze: any[] = [];
-  esperienze: any[] = [];
   preferiti: number[] = [];
- 
-  
+  loggedUser: any;
 
-  constructor(private authSrv: AuthService, private dataService: DataServiceService ,private router: Router) { }
+  constructor(
+    private authSrv: AuthService,
+    private dataService: DataServiceService,
+    private router: Router
+  ) {}
 
   isDropdownVisible = false;
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
   toggleDropdown() {
     this.isDropdownVisible = !this.isDropdownVisible;
   }
@@ -34,7 +31,6 @@ export class NavbarComponent {
       this.isDropdownVisible = false;
     }
   }
- 
 
   isLoggedIn(): boolean {
     return this.authSrv.getToken() !== null;
@@ -45,28 +41,15 @@ export class NavbarComponent {
     this.router.navigate(['/login']);
   }
 
-  onSearchInput(): void {
-    
-    if (this.searchTerm.trim() === '') {
-      this.filteredEsperienze = this.esperienze;
-    }
-  }
-
- cercaPerLuogo(): void {
-  if (this.searchTerm.trim() !== '') {
-    this.dataService.cercaPerLuogo(this.searchTerm).subscribe(
-      data => {
-        console.log('Dati ricevuti:', data); // Verifica i dati ricevuti dal backend
-        this.filteredEsperienze = data; // Assegniamo i risultati filtrati a filteredEsperienze
+  getLoggedUser(): void {
+    this.dataService.getUserLogged().subscribe(
+      (user: any) => {
+        this.loggedUser = user;
+        console.log('Dati utente loggato:', user);
       },
-      error => {
-        console.error('Errore nella ricerca per luogo', error);
+      (error) => {
+        console.error("Errore durante il recupero dell'utente loggato:", error);
       }
     );
-  } else {
-    // Gestione caso di ricerca vuota o non valida
-    this.filteredEsperienze = this.esperienze; // Se il termine di ricerca è vuoto, mostrare tutte le esperienze
   }
-}
-
 }
