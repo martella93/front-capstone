@@ -28,26 +28,28 @@ body {
     max-width: 500px;
 }
 
+
 .profile-card {
     display: flex;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    padding: 20px;
+    flex-direction: column;
     align-items: center;
-    width: 400px;
-}
-
-.profile-pic {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-pic {
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    margin-right: 20px;
-}
-
-.profile-info {
-    text-align: left;
-}
+    object-fit: cover;
+    margin-bottom: 15px;
+  }
+  
+  .profile-info {
+    text-align: center;
+  }
 
 .role {
     font-size: 18px;
@@ -89,3 +91,34 @@ h2 {
 .contact-button:hover {
   background-color: #0056b3;
 }
+
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+  }
+  
+  .profile-info {
+    text-align: center;
+  }
+  
+  .contact-button {
+    margin-top: 10px;
+  }
+  
+  .details, .verified-info {
+    margin-top: 20px;
+  }
+  

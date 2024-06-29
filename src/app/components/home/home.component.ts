@@ -14,6 +14,7 @@ export class HomeComponent {
   esperienze: any[] = [];
   favoriti: number[] = [];
   userId: number | null | undefined;
+ 
 
   constructor(
     private authSrv: AuthService,
@@ -45,28 +46,28 @@ export class HomeComponent {
     if (this.searchTerm.trim() !== '') {
       this.dataService.cercaPerLuogo(this.searchTerm).subscribe(
         (data) => {
-          this.filteredEsperienze = data; // Assegniamo i risultati filtrati a filteredEsperienze
+          this.filteredEsperienze = data; 
         },
         (error) => {
           console.error('Errore nella ricerca per luogo', error);
         }
       );
     } else {
-      // Gestione caso di ricerca vuota o non valida
-      this.filteredEsperienze = this.esperienze; // Se il termine di ricerca è vuoto, mostrare tutte le esperienze
+      this.filteredEsperienze = this.esperienze; 
     }
   }
 
-  private caricaEsperienze(): void {
-    // Esempio di caricamento iniziale delle esperienze
+  caricaEsperienze(): void {
     this.dataService.getEsperienze().subscribe(
       (data) => {
         this.esperienze = data;
-        this.filteredEsperienze = data; // Inizialmente, filteredEsperienze contiene tutte le esperienze
+        this.filteredEsperienze = data; 
       },
       (error) => {
         console.error('Errore nel caricamento delle esperienze', error);
       }
     );
   }
+
+  
 }

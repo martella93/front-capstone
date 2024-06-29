@@ -1,18 +1,38 @@
-<div class="container mt-5">
-    <h2 class="text-center">Login</h2>
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <form (ngSubmit)="login()">
-          <div class="mb-3">
-            <label for="username">Username:</label>
-            <input id="username" name="username" [(ngModel)]="log.username" required>
-          </div>
-          <div class="mb-3">
-            <label for="password">Password:</label>
-            <input id="password" name="password" type="password" [(ngModel)]="log.password" required>
-          </div>
-          <button type="submit" class="btn btn-primary w-100">Login</button>
-        </form>
-      </div>
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-avatar">
+      <i class="bi bi-person-circle"></i>
     </div>
+    <h2 class="text-center">Login</h2>
+    <form (ngSubmit)="login()">
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="bi bi-person"></i></span>
+          </div>
+          <input id="username" name="username" [(ngModel)]="log.username" placeholder="Username" class="form-control" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+          </div>
+          <input id="password" name="password" type="password" [(ngModel)]="log.password" placeholder="Password" class="form-control" required>
+          <div class="input-group-append">
+            <span class="input-group-text"><i class="bi bi-eye-slash" id="togglePassword" (click)="togglePasswordVisibility()"></i></span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group remember-me">
+        <input type="checkbox" id="rememberMe" [(ngModel)]="rememberMe" name="rememberMe">
+        <label for="rememberMe">Remember me</label>
+      </div>
+      <div class="form-group forgot-password">
+        <a href="/forgot-password">Forgot password?</a>
+      </div>
+      <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+      <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
   </div>
+</div>

@@ -7,29 +7,33 @@
             <a class="dropdown-item" [routerLink]="['/']">Home</a>
         </div>
         <div class="nav-item">
-            <a class="nav-link" [routerLink]="['/prenotazioni']">Mie prenotazioni</a>
+            <a class="nav-link" *ngIf="userRole === 'USER'" [routerLink]="['/prenotazioni']">Mie prenotazioni</a>
         </div>
         <div class="nav-item">
-            <a class="nav-link" [routerLink]="['/favoriti']">Preferiti</a>
+            <a class="nav-link" *ngIf="userRole === 'USER'" [routerLink]="['/favoriti']">Preferiti</a>
         </div>
 
     </div>
-
+    
     <ul class="navbar-nav ms-auto d-flex flex-row">
         <ng-container *ngIf="isLoggedIn(); else notLoggedIn">
             <div class="menu-container" (click)="toggleDropdown()">
                 <i class="bi bi-person-circle menu-icon"></i>
                 <i class="bi bi-caret-down menu-arrow" [class.rotate]="isDropdownVisible"></i>
                 <div class="dropdown-menu" [class.show]="isDropdownVisible">
-                  <a class="dropdown-item" [routerLink]="['/']">Home</a>
-                  <a class="dropdown-item" [routerLink]="['/profilo']">Profilo</a>
-                  <a class="dropdown-item" [routerLink]="['/crea-esperienza']">Crea esperienza</a>
-                  <a class="dropdown-item" [routerLink]="['/modifica-esperienza']">Modifica esperienza</a>
-                  <a class="dropdown-item" (click)="logout()">Logout</a>
+                    <a class="dropdown-item" [routerLink]="['/']">Home</a>
+                    <a class="dropdown-item" [routerLink]="['/profilo']">Profilo</a>
+                    <a class="dropdown-item" *ngIf="userRole === 'ADMIN'" [routerLink]="['/crea-esperienza']">Crea esperienza</a>
+                    <a class="dropdown-item" *ngIf="userRole === 'ADMIN'" [routerLink]="['/modifica-esperienza']">Modifica esperienza</a>
+                    <a class="dropdown-item" (click)="logout()">Logout</a>
                 </div>
-              </div>
-              
+            </div>
+            <div class="nav-item" *ngIf="userRole">
+                <a class="nav-link">Benvenuto {{userRole}}</a>
+            </div>
+
         </ng-container>
+        
         <ng-template #notLoggedIn>
             <li class="nav-item">
                 <a class="nav-link" [routerLink]="['/login']">Login</a>

@@ -10,16 +10,19 @@ import { PrenotazioneService } from 'src/app/service/prenotazione.service';
   styleUrls: ['./esperienza-details.component.scss'],
 })
 export class EsperienzaDetailsComponent implements OnInit {
- 
-  guida: any = { nome: '', cognome: '', descrizione: '', lingue: '', anniEsperienza: '' };
+  guida: any = {
+    nome: '',
+    cognome: '',
+    descrizione: '',
+    lingue: '',
+    anniEsperienza: '',
+  };
   prenotazione: any[] = [];
   recensioni: any[] = [];
-  esperienzaId: number | undefined ;
-  
+  esperienzaId: number | undefined;
+
   selectedEsperienza: any;
-  postiPrenotati: number | undefined;
- 
-  
+
   date: string | undefined;
   esperienza: any; // Oggetto dell'esperienza corrente
   selectedDate: Date = new Date(); // Data selezionata
@@ -32,6 +35,8 @@ export class EsperienzaDetailsComponent implements OnInit {
     commento: '',
     valutazione: 1,
   };
+  startDate: any;
+  hoveredRating: number | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,18 +46,21 @@ export class EsperienzaDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
       if (id) {
         this.esperienzaId = +id;
         this.dataService.getEsperienzaById(id).subscribe(
           (data) => {
             this.esperienza = data;
-            this.caricaGuida(this.esperienza.id); 
+            this.caricaGuida(this.esperienza.id);
             this.getRecensioni();
           },
           (error) => {
-            console.error(`Errore durante il recupero dell'esperienza con ID ${id}`, error);
+            console.error(
+              `Errore durante il recupero dell'esperienza con ID ${id}`,
+              error
+            );
           }
         );
       }
@@ -66,29 +74,17 @@ export class EsperienzaDetailsComponent implements OnInit {
         this.guida = data;
       },
       (error) => {
-        console.error(`Errore durante il recupero della guida per l'esperienza con ID ${esperienzaId}`, error);
-      }
-    );
-  }
-
-  // Metodo per caricare i posti prenotati per questa esperienza e data
-  caricaPostiPrenotati(): void {
-    const esperienzaId = this.esperienza.id; // Recupera l'id dell'esperienza
-    const dataFormatted = this.formatDate(this.selectedDate); // Formatta la data, se necessario
-    this.prenotazioneSrv.getPostiPrenotati(esperienzaId, dataFormatted).subscribe(
-      (response) => {
-        this.postiPrenotati = response; // Assegna il valore dei posti prenotati ricevuti dal backend
-      },
-      (error) => {
-        console.error('Errore durante il recupero dei posti prenotati:', error);
+        console.error(
+          `Errore durante il recupero della guida per l'esperienza con ID ${esperienzaId}`,
+          error
+        );
       }
     );
   }
 
   // Metodo per formattare la data se necessario
   private formatDate(date: Date): string {
-    // Implementa la formattazione della data qui se necessario
-    return date.toISOString(); // Esempio: restituisce la data nel formato ISO
+    return date.toISOString(); 
   }
 
   // Metodo per creare una recensione per l'esperienza
@@ -96,7 +92,7 @@ export class EsperienzaDetailsComponent implements OnInit {
     this.dataService.createRecensione(esperienzaId, recensione).subscribe(
       (response) => {
         console.log('Recensione creata con successo', response);
-        this.recensione = { valutazione: 0, commento: '' }; // Pulisce il form dopo la creazione della recensione
+        this.recensione = { valutazione: 0, commento: '' };
       },
       (error) => {
         console.error('Errore nella creazione della recensione', error);
@@ -111,43 +107,73 @@ export class EsperienzaDetailsComponent implements OnInit {
       return;
     }
 
+    // Crea un oggetto Date dalla stringa selectedDate
+    const dateObj = new Date(this.selectedDate);
+
+    // Verifica che la data sia valida
+    if (isNaN(dateObj.getTime())) {
+      this.errorMessage = 'Data non valida.';
+      return;
+    }
+
     const prenotazione = {
-      data: this.selectedDate.toISOString().substring(0, 10), // Converte la data in formato ISO yyyy-mm-dd
+      data: dateObj.toISOString().substring(0, 10), // Converte la data in formato ISO yyyy-mm-dd
       ora: this.selectedTime,
       postiPrenotati: this.postiDaPrenotare,
-      dataPrenotazione: new Date().toISOString() // Inizializza la data di prenotazione in formato ISO
+      dataPrenotazione: new Date().toISOString(), // Inizializza la data di prenotazione in formato ISO
     };
 
-    // Invia la prenotazione al servizio PrenotazioneService
-    this.prenotazioneSrv.prenotaEsperienza(this.esperienza.id, prenotazione).subscribe(
-      (response) => {
-        console.log('Prenotazione effettuata con successo', response);
-        this.successMessage = 'Prenotazione effettuata con successo!';
-        this.errorMessage = undefined; // Pulisce eventuali errori precedenti
-      },
-      (error) => {
-        console.error('Errore nella prenotazione', error);
-        this.errorMessage = 'Errore durante la prenotazione. Per favore, riprova più tardi.';
-        this.successMessage = undefined; // Pulisce eventuali messaggi di successo precedenti
-      }
-    );
+    this.prenotazioneSrv
+      .prenotaEsperienza(this.esperienza.id, prenotazione)
+      .subscribe(
+        (response) => {
+          console.log('Prenotazione effettuata con successo', response);
+          this.successMessage = 'Prenotazione effettuata con successo!';
+          this.errorMessage = undefined; 
+          this.selectedDate = new Date();
+          this.selectedTime = '';
+          this.postiDaPrenotare = 1;
+        },
+        (error) => {
+          console.error('Errore nella prenotazione', error);
+          if (error.status === 500) {
+            this.errorMessage =
+              'Errore: i posti sono esauriti per questa data. Riprova con una data diversa.';
+          } else {
+            this.errorMessage =
+              'Errore durante la prenotazione. Per favore, riprova più tardi.';
+          }
+          this.successMessage = undefined;
+        }
+      );
   }
-  
-  
+
   getRecensioni(): void {
     if (this.esperienzaId !== undefined) {
       this.dataService.getRecensioniByEsperienza(this.esperienzaId).subscribe(
         (data: any[]) => {
-          console.log('Recensioni ricevute:', data); // Log dei dati ricevuti
+          console.log('Recensioni ricevute:', data); 
           this.recensioni = data;
         },
         (error) => {
-          console.error('Errore nel recupero delle recensioni', error); // Log degli errori
+          console.error('Errore nel recupero delle recensioni', error);
           this.errorMessage = 'Errore nel recupero delle recensioni';
         }
       );
     } else {
       console.error('esperienzaId is undefined');
     }
+  }
+
+  setRating(rating: number) {
+    this.recensione.valutazione = rating;
+  }
+
+  setTemporaryRating(rating: number) {
+    this.hoveredRating = rating;
+  }
+
+  resetTemporaryRating() {
+    this.hoveredRating = null;
   }
 }

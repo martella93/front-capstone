@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { DataServiceService } from 'src/app/service/data-service.service';
@@ -8,18 +8,19 @@ import { DataServiceService } from 'src/app/service/data-service.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   preferiti: number[] = [];
-  loggedUser: any;
+ 
 
   constructor(
     private authSrv: AuthService,
-    private dataService: DataServiceService,
     private router: Router
   ) {}
 
   isDropdownVisible = false;
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
   toggleDropdown() {
     this.isDropdownVisible = !this.isDropdownVisible;
   }
@@ -41,15 +42,9 @@ export class NavbarComponent {
     this.router.navigate(['/login']);
   }
 
-  getLoggedUser(): void {
-    this.dataService.getUserLogged().subscribe(
-      (user: any) => {
-        this.loggedUser = user;
-        console.log('Dati utente loggato:', user);
-      },
-      (error) => {
-        console.error("Errore durante il recupero dell'utente loggato:", error);
-      }
-    );
+  get userRole(): string | null {
+    const role = this.authSrv.getUserRole();
+    return role;
   }
+  
 }

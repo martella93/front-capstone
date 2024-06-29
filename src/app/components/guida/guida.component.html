@@ -1,31 +1,43 @@
-<div class="container mt-5">
-    <div class="left-column mr-5">
-        <div class="profile-card">
-            <img class="profile-pic" src="{{guida.foto}}" alt="Foto della Guida">
-            <div class="profile-info">
-                <h1>{{guida.nome}} {{guida.cognome}}</h1>
-                <p class="role">Guida</p>
-                <p>3511 Recensioni</p>
-                <p>4.98 Valutazione</p>
-                <p>{{guida.anniEsperienza}} anni da guida</p>
-                <button class="contact-button">Contatta la guida</button>
-            </div>
+ 
+  <!-- Modale -->
+  <div class="modal fade" id="guideModal" tabindex="-1" aria-labelledby="guideModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="guideModalLabel">{{guida.nome}} {{guida.cognome}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-    </div>
-    <div class="right-column">
-        <div class="details">
+        <div class="modal-body">
+          <div class="profile-card mb-3">
+            <img class="profile-pic" [src]="guida.foto" alt="Foto della Guida">
+            <div class="profile-info">
+              <h1>{{guida.nome}} {{guida.cognome}}</h1>
+              <p class="role">Guida</p>
+              <p>3511 Recensioni</p>
+              <p>4.98 Valutazione</p>
+              <p>{{guida.anniEsperienza}} anni da guida</p>
+              <button class="contact-button btn btn-primary">Contatta la guida</button>
+            </div>
+          </div>
+          <div class="details mb-3">
             <h2>Informazioni sulla Guida</h2>
             <p><strong>Il mio lavoro:</strong> TOUR OPERATOR</p>
             <p><strong>Lingue parlate:</strong> {{guida.lingue}}</p>
             <p><strong>Chi sono:</strong> {{guida.descrizione}}</p>
-        </div>
-        <div class="verified-info">
+          </div>
+          <div class="verified-info">
             <h2>Informazioni confermate della Guida</h2>
             <ul>
-                <li>Identità</li>
-                <li>Indirizzo email</li>
-                <li>Numero di telefono</li>
+              <li>Identità</li>
+              <li>Indirizzo email</li>
+              <li>Numero di telefono</li>
             </ul>
+          </div>
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
+  

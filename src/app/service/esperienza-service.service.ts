@@ -44,16 +44,9 @@ export class EsperienzaServiceService {
   }
 
   uploadFotoEsperienza(id: number, foto: File[]): Observable<string> {
-    const url = `${this.apiUrl}/${id}/upload-foto`;
     const formData = new FormData();
-    foto.forEach((f) => formData.append('foto', f, f.name));
-
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'multipart/form-data');
-
-    return this.http
-      .patch<string>(url, formData, { headers })
-      .pipe(catchError(this.handleError));
+    foto.forEach((file) => formData.append('foto', file));
+    return this.http.patch<string>(`${this.apiUrl}/${id}/upload-foto`, formData);
   }
 
   uploadVideoEsperienza(id: number, video: File[]): Observable<string> {

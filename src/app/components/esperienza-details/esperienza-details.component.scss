@@ -30,10 +30,29 @@
  
 .recensione-rating .bi-star-fill,
 .recensione-rating .bi-star {
-  color: yellow;
+  color: #FFC107;
   font-size: 16px; /* Adjust the size as needed */
 }
 
 .recensione p {
   font-style: italic;
+}
+.recensione{
+  width: 100%;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+}
+
+.rating .bi {
+  font-size: 1.5rem; /* Dimensione delle stelle */
+  color: #ffc107; /* Colore giallo delle stelle piene */
+  cursor: pointer;
+  margin-right: 0.2rem;
+}
+
+.rating .bi.bi-star {
+  color: #ccc; /* Colore delle stelle vuote */
 }

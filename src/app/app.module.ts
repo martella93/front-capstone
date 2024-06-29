@@ -3,9 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Route, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,7 +21,13 @@ import { CreaEsperienzaComponent } from './components/crea-esperienza/crea-esper
 import { ModificaEsperienzaComponent } from './components/modifica-esperienza/modifica-esperienza.component';
 import { PrenotazioniComponent } from './components/prenotazioni/prenotazioni.component';
 import { ProfiloComponent } from './components/profilo/profilo.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FooterComponent } from './components/footer/footer.component';
 
 const routes: Route[] = [
   { path: '', component: HomeComponent },
@@ -36,10 +40,7 @@ const routes: Route[] = [
   { path: 'crea-esperienza', component: CreaEsperienzaComponent},
   { path: 'modifica-esperienza', component: ModificaEsperienzaComponent},
   { path: 'prenotazioni', component: PrenotazioniComponent},
-  { path: 'preferiti', component: FavoritiComponent}
-
 ];
-
 
 @NgModule({
   declarations: [
@@ -55,8 +56,10 @@ const routes: Route[] = [
     CreaEsperienzaComponent,
     ModificaEsperienzaComponent,
     PrenotazioniComponent,
-    ProfiloComponent
- 
+    ProfiloComponent,
+    FooterComponent, 
+    
+    
   ],
   imports: [
     BrowserModule,
@@ -65,8 +68,12 @@ const routes: Route[] = [
     RouterModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
-  
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthService, {

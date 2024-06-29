@@ -1,38 +1,49 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   private apiUrl = 'http://localhost:8080/auth';
+  user$: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  login(data: { username: string; password: string}): Observable<any> {
+  login(data: { username: string; password: string }): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.post(`${this.apiUrl}/login`, data, { headers, responseType: 'json'});
-}
+    return this.http.post(`${this.apiUrl}/login`, data, { headers, responseType: 'json' }).pipe(
+      tap((response: any) => {
+        this.setToken(response.token);
+        this.setUserRole(response.user.role);
+      })
+    );
+  }
 
-  signup(data: { username: string; password: string}): Observable<any> {
+  signup(data: { username: string; password: string }): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post(`${this.apiUrl}/signup`, data, { headers });
-}
+  }
 
-setToken(token: string): void {
-  localStorage.setItem('authToken', token);
-}
+  setToken(token: string): void {
+    localStorage.setItem('authToken', token);
+  }
 
-getToken(): string | null {
-  return localStorage.getItem('authToken');
-}
+  getToken(): string | null {
+    return localStorage.getItem('authToken');
+  }
 
+  logout(): void {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userRole');
+  }
 
-logout(): void {
-  localStorage.removeItem('authToken');
-}
+  setUserRole(role: string): void {
+    localStorage.setItem('userRole', role);
+  }
 
-
+  getUserRole(): string | null {
+    return localStorage.getItem('userRole');
+  }
 }

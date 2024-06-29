@@ -67,7 +67,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-8 recensione">
             <div class="card mt-4" style="border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
               <div class="card-body">
                 <h5 class="card-title mb-4">Lascia una Recensione</h5>
@@ -79,14 +79,14 @@
                   </div>
                   <div class="mb-3">
                     <label for="recensioneRating" class="form-label">Valutazione</label>
-                    <select id="recensioneRating" class="form-control" [(ngModel)]="recensione.valutazione"
-                      name="rating" required>
-                      <option [value]="1">1</option>
-                      <option [value]="2">2</option>
-                      <option [value]="3">3</option>
-                      <option [value]="4">4</option>
-                      <option [value]="5">5</option>
-                    </select>
+                    <div class="rating" (mouseleave)="resetTemporaryRating()">
+                      <i class="bi"
+                         *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+                         [ngClass]="{'bi-star-fill': (hoveredRating || recensione.valutazione) > i, 'bi-star': (hoveredRating || recensione.valutazione) <= i}"
+                         (click)="setRating(i + 1)"
+                         (mouseover)="setTemporaryRating(i + 1)">
+                      </i>
+                    </div>
                   </div>
                   <button type="submit" class="btn btn-primary">Invia Recensione</button>
                 </form>
@@ -101,15 +101,16 @@
         <!-- Card della guida -->
         <div class="card" style="border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
           <div class="card-body text-center">
-            <img src="path/to/guide-photo.jpg" alt="Guida" class="rounded-circle mb-3"
-              style="width: 100px; height: 100px;">
             <h5 class="card-title">Ciao sono {{guida.nome}}</h5>
             <p class="card-text">{{guida.descrizione}}</p>
             <p class="text-warning mb-1" style="font-size: 1.2em;">★★★★★</p>
             <p class="card-text text-muted">80 recensioni</p>
-            <a [routerLink]="['/guida', guida.id]" class="btn btn-primary">Vedi l'agenzia locale</a>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#guideModal">
+              Vedi l'agenzia locale
+            </button>
           </div>
         </div>
+       <app-guida></app-guida>
         <!-- Selezione data e ospiti -->
         <div class="card mt-4" style="border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
           <div class="card-body">
@@ -128,11 +129,8 @@
             </div>
             <form (ngSubmit)="prenotaEsperienza()">
               <div class="mb-3">
-                <label for="datePicker" class="form-label">Seleziona Data</label>
-                <div class="datepicker-container">
-                  <input type="text" id="datePicker" class="form-control" placeholder="Seleziona la data" bsDatepicker
-                    [(ngModel)]="selectedDate" name="selectedDate" required>
-                </div>
+                <input type="date" id="datePicker" class="form-control" [(ngModel)]="selectedDate" name="selectedDate"
+                  required>
               </div>
 
               <div class="mb-3">
@@ -145,6 +143,9 @@
                 <label for="postiDaPrenotare" class="form-label">Posti da Prenotare</label>
                 <input type="number" id="postiDaPrenotare" class="form-control" [(ngModel)]="postiDaPrenotare"
                   name="postiDaPrenotare" required>
+              </div>
+              <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+                {{ errorMessage }}
               </div>
 
               <button type="submit" class="btn btn-primary">Prenota</button>
@@ -160,14 +161,13 @@
               <div *ngFor="let recensione of recensioni" class="recensione">
                 <div class="recensione-header">
                   <i class="bi bi-person-circle"></i>
-                  <span> {{ recensione.user.username }}</span>
+                  <span> <strong> {{ recensione.user.username }}</strong></span>
                   <span> ha scritto una recensione </span>
                 </div>
-                <div class="recensione-rating">
+                <div class="recensione-rating mt-2">
                   <h4>
                     <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
-                      <i class="bi"
-                        [ngClass]="{'bi-star-fill': recensione.valutazione > i, 'bi-star': recensione.valutazione <= i}"></i>
+                      <i class="bi" [ngClass]="{'bi-star-fill': recensione.valutazione > i, 'bi-star': recensione.valutazione <= i}"></i>
                     </ng-container>
                   </h4>
                 </div>
@@ -175,14 +175,16 @@
                   <strong>{{ recensione.titolo }}</strong>
                 </div>
                 <p>'{{ recensione.commento }}'</p>
+                <button class="badge bg-warning text-dark w-25">Contattami</button>
                 <hr>
               </div>
             </div>
             <ng-template #noRecensioni>
               <p>Nessuna recensione disponibile per questa esperienza.</p>
             </ng-template>
-         </div>
+          </div>
         </div>
+        
 
 
       </div>
