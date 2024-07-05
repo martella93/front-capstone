@@ -35,7 +35,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FooterComponent } from './components/footer/footer.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { CommunityComponent } from './components/community/community.component';
-import { JumbotronComponent } from './components/jumbotron/jumbotron.component';
+import { JumbotronComponent } from './jumbotron/jumbotron.component';
 
 
 const routes: Route[] = [
@@ -74,7 +74,7 @@ const routes: Route[] = [
     CommunityComponent,
     PrivateChatComponent,
     JumbotronComponent
-    
+   
   
   ],
   imports: [
