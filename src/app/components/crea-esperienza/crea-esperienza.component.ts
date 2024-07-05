@@ -10,10 +10,8 @@ export class CreaEsperienzaComponent {
 
   esperienze: any[] = [];
   nuovaEsperienza:any = { id: 0, titolo: '', descrizione: '', luogo: '',dataInizio: '',dataFine: '',ora: '', durata:'',programma: '',prezzo: '',postiEsperienza:'', puntiEsperienza:'',categoria: '',};
-  esperienzaInModifica: any | null = null;
-  fileFoto: File[] = [];
-  fileVideo: File[] = [];
-
+  messaggio: string = '';
+  
   constructor(private esperienzaService: EsperienzaServiceService) { }
 
   ngOnInit(): void {
@@ -29,66 +27,32 @@ export class CreaEsperienzaComponent {
   }
 
   creaEsperienza(): void {
-    this.esperienzaService.creaEsperienza(this.nuovaEsperienza)
-      .subscribe(
-        esperienza => {
-          this.esperienze.push(esperienza);
-          this.nuovaEsperienza = { id: 0, titolo: '', descrizione: '', luogo: '', dataInizio: '', dataFine: '', ora: '', durata: '', programma: '', prezzo: '', postiEsperienza: '', puntiEsperienza: '', categoria: '' };
-        },
-        error => console.error('Errore nella creazione dell\'esperienza', error)
-      );
+    this.esperienzaService.creaEsperienza(this.nuovaEsperienza).subscribe(
+      (response) => {
+        console.log('Esperienza creata con successo:', response);
+        this.messaggio = 'Esperienza creata con successo!';
+        this.nuovaEsperienza = {
+          titolo: '',
+          descrizione: '',
+          luogo: '',
+          dataInizio: '',
+          dataFine: '',
+          ora: '',
+          durata: '',
+          programma: '',
+          prezzo: '',
+          postiEsperienza: '',
+          puntiEsperienza: '',
+          categoria: ''
+        };
+      },
+      (error) => {
+        console.error('Errore durante la creazione dell\'esperienza:', error);
+        this.messaggio = 'Si è verificato un errore durante la creazione dell\'esperienza.';
+      }
+    );
   }
 
-  aggiornaEsperienza(): void {
-    if (this.esperienzaInModifica) {
-      this.esperienzaService.aggiornaEsperienza(this.esperienzaInModifica)
-        .subscribe(
-          esperienza => {
-            const index = this.esperienze.findIndex(e => e.id === esperienza.id);
-            if (index !== -1) {
-              this.esperienze[index] = esperienza;
-            }
-            this.esperienzaInModifica = null;
-          },
-          error => console.error('Errore nell\'aggiornamento dell\'esperienza', error)
-        );
-    }
-  }
 
-
-
-  gestisciFotoSelezionate(event: any): void {
-    this.fileFoto = event.target.files;
-  }
   
-  gestisciVideoSelezionati(event: any): void {
-    this.fileVideo = event.target.files;
-  }
-
-
-  caricaFoto(): void {
-    if (this.esperienzaInModifica && this.fileFoto.length > 0) {
-      this.esperienzaService.uploadFotoEsperienza(this.esperienzaInModifica.id, this.fileFoto)
-        .subscribe(
-          message => {
-            console.log('Foto caricate con successo', message);
-            // Esegui altre operazioni se necessario
-          },
-          error => console.error('Errore nel caricamento delle foto', error)
-        );
-    }
-  }
-
-  caricaVideo(): void {
-    if (this.esperienzaInModifica && this.fileVideo.length > 0) {
-      this.esperienzaService.uploadVideoEsperienza(this.esperienzaInModifica.id, this.fileVideo)
-        .subscribe(
-          message => {
-            console.log('Video caricati con successo', message);
-            // Esegui altre operazioni se necessario
-          },
-          error => console.error('Errore nel caricamento dei video', error)
-        );
-    }
-  }
 }

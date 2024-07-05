@@ -1,13 +1,51 @@
-/* Stile per ancorare il footer in basso */
-body {
+html, body {
     height: 100%;
+    margin: 0;
 }
-
 body {
+    font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
 }
 
-main {
-    flex: 1;
+footer {
+    background-color: #EFF8FE;
+    padding: 1rem 0;
+    width: 100%;
+}
+
+.footer-logo {
+    margin-bottom: 20px;
+}
+
+.footer-logo img {
+    width: 50px;
+    height: 50px;
+}
+
+.footer-logo h2 {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.footer-logo span {
+    font-weight: normal;
+    font-style: italic;
+}
+
+.footer-logo p {
+    font-size: 14px;
+    color: #666666;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.footer-bottom {
+    border-top: 1px solid #e0e0e0;
+    padding-top: 20px;
+}
+
+.footer-social i {
+    font-size: 24px;
+    margin-left: 10px;
 }

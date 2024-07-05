@@ -1,4 +1,4 @@
-<nav class="navbar">
+<nav class="navbar sticky">
     <div class="navbar-left">
         <div class="logo">
             <img src="assets/logo.png" alt="Logo">
@@ -13,8 +13,9 @@
             <a class="nav-link" *ngIf="userRole === 'USER'" [routerLink]="['/favoriti']">Preferiti</a>
         </div>
 
+
     </div>
-    
+
     <ul class="navbar-nav ms-auto d-flex flex-row">
         <ng-container *ngIf="isLoggedIn(); else notLoggedIn">
             <div class="menu-container" (click)="toggleDropdown()">
@@ -23,8 +24,11 @@
                 <div class="dropdown-menu" [class.show]="isDropdownVisible">
                     <a class="dropdown-item" [routerLink]="['/']">Home</a>
                     <a class="dropdown-item" [routerLink]="['/profilo']">Profilo</a>
-                    <a class="dropdown-item" *ngIf="userRole === 'ADMIN'" [routerLink]="['/crea-esperienza']">Crea esperienza</a>
-                    <a class="dropdown-item" *ngIf="userRole === 'ADMIN'" [routerLink]="['/modifica-esperienza']">Modifica esperienza</a>
+                    <a class="dropdown-item" *ngIf="userRole === 'ADMIN'" [routerLink]="['/crea-esperienza']">Crea
+                        esperienza</a>
+                    <a class="dropdown-item" *ngIf="userRole === 'ADMIN'"
+                        [routerLink]="['/modifica-esperienza']">Modifica esperienza</a>
+                    <a class="dropdown-item" *ngIf="userRole === 'USER'" [routerLink]="['/community']">Community</a>
                     <a class="dropdown-item" (click)="logout()">Logout</a>
                 </div>
             </div>
@@ -33,7 +37,7 @@
             </div>
 
         </ng-container>
-        
+
         <ng-template #notLoggedIn>
             <li class="nav-item">
                 <a class="nav-link" [routerLink]="['/login']">Login</a>
@@ -45,3 +49,6 @@
     </ul>
 
 </nav>
+
+ 
+   

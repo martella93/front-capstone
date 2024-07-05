@@ -7,8 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class GuidaService {
 
-  private apiUrl = '/api/guida'; // Assumi che il backend sia in esecuzione sulla stessa origine
-
+  private apiUrl = '/api/guida';
   constructor(private http: HttpClient) {}
 
   getAllGuida(): Observable<any> {

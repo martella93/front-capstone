@@ -1,52 +1,97 @@
 <div class="container mt-5">
-    <div class="row">
-      <div class="col-md-4 mb-4" *ngFor="let esperienza of esperienze">
-        <div class="card" style="width: 22rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+  <div class="row">
+    <div class="col-md-6 col-lg-4 mb-4" *ngFor="let esperienza of esperienze">
+      <div class="card mx-auto" style="width: 100%; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+        <div style="position: relative;">
           <img src="{{ esperienza.foto[0] }}" class="card-img-top" alt="Experience"
             style="border-top-left-radius: 10px; border-top-right-radius: 10px;"
             [routerLink]="['/dettaglio-esperienza', esperienza.id]">
-          <div class="card-body">
-            <p class="card-text text-muted mb-2">From ${{ esperienza.prezzo }}</p>
-            <h5 class="card-title">{{ esperienza.titolo }}</h5>
-            <div class="d-flex align-items-center mb-2">
-              <span class="text-warning" style="font-size: 1.2em;">★</span>
-              <span class="fw-bold ms-1">3.9</span>
-              <span class="text-muted ms-1">· 11 Ratings</span>
+          <i class="bi bi-plus-square" 
+             style="position: absolute; top: 10px; right: 10px; font-size: 1.5em; color: white; cursor: pointer;" 
+             (click)="openModal(esperienza)"></i>
+        </div>
+        <div class="card-body">
+          <p class="card-text text-muted mb-2">From ${{ esperienza.prezzo }}</p>
+          <h5 class="card-title">{{ esperienza.titolo }}</h5>
+          <div class="d-flex align-items-center mb-2">
+            <span class="text-warning" style="font-size: 1.2em;">★</span>
+            <span class="fw-bold ms-1">3.9</span>
+            <span class="text-muted ms-1">· 11 Ratings</span>
+          </div>
+          <p class="card-text text-muted"><i class="bi bi-geo-alt"></i>{{ esperienza.luogo }}</p>
+
+         
+          <div *ngIf="esperienzaInModifica && esperienzaInModifica.id === esperienza.id">
+            <div class="form-group">
+              <label for="titolo">Titolo</label>
+              <input type="text" class="form-control" id="titolo" [(ngModel)]="esperienzaInModifica.titolo"
+                name="titolo">
             </div>
-            <p class="card-text text-muted"><i class="bi bi-geo-alt"></i>{{ esperienza.luogo }}</p>
-  
-            <!-- Visualizzazione dei campi di modifica -->
-            <div *ngIf="esperienzaInModifica && esperienzaInModifica.id === esperienza.id">
-              <div class="form-group">
-                <label for="titolo">Titolo</label>
-                <input type="text" class="form-control" id="titolo" [(ngModel)]="esperienzaInModifica.titolo" name="titolo">
-              </div>
-              <div class="form-group">
-                <label for="descrizione">Descrizione</label>
-                <textarea class="form-control" id="descrizione" [(ngModel)]="esperienzaInModifica.descrizione" name="descrizione"></textarea>
-              </div>
-              <div class="form-group">
-                <label for="luogo">Luogo</label>
-                <input type="text" class="form-control" id="luogo" [(ngModel)]="esperienzaInModifica.luogo" name="luogo">
-              </div>
-              <div class="form-group">
-                <label for="prezzo">Prezzo</label>
-                <input type="number" class="form-control" id="prezzo" [(ngModel)]="esperienzaInModifica.prezzo" name="prezzo">
-              </div>
-              <!-- Aggiungi altri campi che desideri modificare -->
-  
-              <button class="btn btn-primary" (click)="modificaEsperienza(esperienza.id, esperienzaInModifica)">Salva modifiche</button>
-              <button class="btn btn-outline-secondary ms-2" (click)="annullaModifica()">Annulla</button>
+            <div class="form-group">
+              <label for="descrizione">Descrizione</label>
+              <textarea class="form-control" id="descrizione" [(ngModel)]="esperienzaInModifica.descrizione"
+                name="descrizione"></textarea>
             </div>
-  
-            <!-- Bottoni per cancellare e modificare esperienza -->
-            <div *ngIf="!esperienzaInModifica || esperienzaInModifica.id !== esperienza.id" class="d-flex justify-content-end">
-              <button class="btn btn-outline-danger me-2" (click)="cancellaEsperienza(esperienza.id)">Cancella esperienza</button>
-              <button class="btn btn-outline-primary" (click)="attivaModifica(esperienza)">Modifica esperienza</button>
+            <div class="form-group">
+              <label for="luogo">Luogo</label>
+              <input type="text" class="form-control" id="luogo" [(ngModel)]="esperienzaInModifica.luogo" name="luogo">
             </div>
+            <div class="form-group">
+              <label for="prezzo">Prezzo</label>
+              <input type="number" class="form-control" id="prezzo" [(ngModel)]="esperienzaInModifica.prezzo"
+                name="prezzo">
+            </div>
+            
+
+            <button class="btn btn-primary" (click)="modificaEsperienza(esperienza.id, esperienzaInModifica)">Salva
+              modifiche</button>
+            <button class="btn btn-outline-secondary ms-2" (click)="annullaModifica()">Annulla</button>
+          </div>
+
+         
+          <div *ngIf="!esperienzaInModifica || esperienzaInModifica.id !== esperienza.id"
+            class="d-flex justify-content-end">
+            <button class="btn btn-outline-danger me-2" (click)="cancellaEsperienza(esperienza.id)">Cancella
+              esperienza</button>
+            <button class="btn btn-outline-primary" (click)="attivaModifica(esperienza)">Modifica esperienza</button>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+</div>
+
+<!-- Modale -->
+<div class="modal fade" #infoModal tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="infoModalLabel">{{ selectedExperience?.titolo }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img [src]="selectedExperience?.foto[0]" class="img-fluid mb-3" alt="Experience">
+        <p>{{ selectedExperience?.descrizione }}</p>
+        <p><strong>Luogo:</strong> {{ selectedExperience?.luogo }}</p>
+        <p><strong>Prezzo:</strong> ${{ selectedExperience?.prezzo }}</p>
+
+        <div class="mb-3">
+          <label for="fotoInput" class="form-label">Aggiungi una nuova foto:</label>
+          <input type="file" class="form-control" id="fotoInput" (change)="handleFileInput($event)" multiple>
+        </div>
+
+        
+        <div *ngIf="fileFoto.length > 0">
+          <p><strong>Foto selezionate:</strong></p>
+          <ul>
+            <li *ngFor="let foto of fileFoto">{{ foto.name }}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+        <button type="button" class="btn btn-primary" (click)="salvaNuovaFoto()">Salva Foto</button>
+      </div>
+    </div>
+  </div>
+</div>

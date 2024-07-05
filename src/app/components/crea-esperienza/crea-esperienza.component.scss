@@ -26,17 +26,73 @@
     padding: 3px;
   }
   
-  .experience-form .submit-button {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #00aaff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 18px;
+  
+  
+  
+  .container{
+    margin-bottom:5%;
   }
   
-  .experience-form .submit-button:hover {
-    background-color: #0088cc;
+  #form-header{
+    margin-top:5%;
+    text-align:center;
   }
+  
+  #form-tagline {
+    background: url('https://cdn.pixabay.com/photo/2019/02/28/15/16/alberobello-4026134_960_720.jpg') no-repeat center center;
+    background-size: cover; 
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    color: #ffffff;
+    margin-top: 5%;
+    padding: 4%;
+    text-align: left;
+}
+
+  
+  #form-tagline .fa{
+    margin-bottom:15%;
+  }
+  
+  #form-tagline h2 {
+    margin-bottom:15%;
+  }
+  
+  #form-content{
+    background: #f4f4f4;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius:0.5rem;
+    margin-top:5%;
+    padding: 3%;
+  }
+  
+  .form-group{
+    margin-top:5%;
+  }
+  
+  .contact{
+    padding: 4%;
+    height: 400px;
+  }
+  
+  .control-label{
+    font-size:16px;
+    font-weight:600;
+  }
+  
+  div .submit-button{
+    margin-top:3%;
+    text-align:right;
+  }
+  
+  button#submit{
+    white-space: normal;
+    width:auto;
+    background: #1a8cd8;
+    color: #ffffff;
+    font-weight: 600;
+    width: 25%;
+  }
+  
+  
+  

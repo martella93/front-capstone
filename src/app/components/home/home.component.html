@@ -1,42 +1,44 @@
 
 <header class="header-container">
     <h1>Dove vuoi andare?</h1>
-    <div class="search-bar">
+    <div class="search-bar mt-3">
         <input type="text" id="search-bar" placeholder="Cerca per luogo.." [(ngModel)]="searchTerm" (input)="onSearchInput()">
-        <button type="button" (click)="cercaPerLuogo()">Ricerca</button>
+        <button class="search-button" (click)="cercaPerLuogo()">🔍</button>
     </div>
 </header>
 
+
+
+
 <app-esperienza [esperienze]="filteredEsperienze"></app-esperienza>
 
-
-<footer class="testimonials-section">
+<section class="testimonials-section">
     <h2>Ciò di cui i viaggiatori sono entusiasti</h2>
     <div class="testimonials-container">
         <div class="testimonial">
             <div class="testimonial-content">
                 <div class="stars">★★★★★</div>
                 <p>So much easier to visualize and plan a road trip to my favourite rock climbing destinations and explore the area around.</p>
-                <p class="author">Lydia Yang, <br> Founder <a href="#">LydiaScapes Adventure Blog</a></p>
+                <p class="author">Lydia Yang</p>
             </div>
         </div>
         <div class="testimonial">
             <div class="testimonial-content">
-                <div class="stars">★★★★★</div>
+                <div class="stars">★★★</div>
                 <p>Planning your trip by having all the attractions already plugged into a map makes trip planning so much easier.</p>
-                <p class="author">Nadia, Travel Blogger <a href="#">Couple Travel The World</a></p>
+                <p class="author">Nadia, Travel Blogger</p>
             </div>
         </div>
         <div class="testimonial">
             <div class="testimonial-content">
-                <div class="stars">★★★★★</div>
+                <div class="stars">★★★★</div>
                 <p>Yesterday I walked my kids through the vacation timeline that I've built so far and their excitement levels went way up!</p>
                 <p class="author">Kelvin S.</p>
             </div>
         </div>
         <div class="testimonial">
             <div class="testimonial-content">
-                <div class="stars">★★★★★</div>
+                <div class="stars">★★★★</div>
                 <p>I'm a rather extensive planner when I take trips so this was great. I liked how it auto-filled all of my travel information from my email account.</p>
                 <p class="author">Josh M.</p>
             </div>
@@ -49,4 +51,39 @@
             </div>
         </div>
     </div>
-</footer>
+</section>
+<section class="py-5 text-center">
+    <div class="container">
+        <h2 class="text-primary text-uppercase mb-3">Servizi</h2>
+        <h3 class="mb-5">Offriamo i migliori servizi</h3>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="service-box">
+                    <i class="bi bi-geo-alt-fill mb-3" style="font-size: 60px;"></i>
+                    <h4>Scopri le nostre offerte</h4>
+                    <p>Dalle pause veloci alle escursioni epiche, trova i prezzi migliori sulle tue nuove avventure proprio qui.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="service-box">
+                    <i class="bi bi-map-fill mb-3" style="font-size: 60px;"></i>
+                    <h4>Planning Viaggio</h4>
+                    <p>Crediamo che il viaggio abbia il potere di cambiarci. E abbiamo il potere di cambiare il modo di viaggiare.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="service-box">
+                    <i class="bi bi-luggage mb-3" style="font-size: 60px;"></i>
+                    <h4>Migliori Esperienze</h4>
+                    <p>Offriamo le migliori esperienze da tutto il Salento, da quelle low cost a quelle di lusso.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="d-flex justify-content-center align-items-center services-section">
+    <div class="container position-relative">
+        <h2 class="title">Goditi i momenti migliori.</h2>
+    </div>
+</section>

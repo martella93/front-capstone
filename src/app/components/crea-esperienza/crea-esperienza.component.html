@@ -1,51 +1,157 @@
 
-<h2>Crea Esperienza</h2>
+<div class="container"> 
+  <div class="row"> 
+    <div id="form-header" class="col-12">
+      <h1 id="title">Crea nuova esperienza</h1>
+    </div>
+  </div> 
 
-<!-- Form per la creazione di una nuova esperienza -->
-<form (ngSubmit)="creaEsperienza()" class="experience-form">
-  <label for="titolo">Titolo:</label>
-  <input type="text" [(ngModel)]="nuovaEsperienza.titolo" name="titolo" id="titolo" required>
-  
-  <label for="descrizione">Descrizione:</label>
-  <textarea [(ngModel)]="nuovaEsperienza.descrizione" name="descrizione" id="descrizione" required></textarea>
+  <div class="row"> 
+    <div id="form-tagline" class="col-md-4">
+      <div class="form-tagline">
+        <i class="fa fa-envelope fa-5x"></i>
+        <h2>Benvenuto Admin</h2>
+        <p id="description" class="lead">Crea la tua nuova esperienza</p>
+      </div>
+    </div>
 
-  <label for="luogo">Luogo:</label>
-  <input type="text" [(ngModel)]="nuovaEsperienza.luogo" name="luogo" id="luogo">
-  
-  <label for="dataInizio">Data Inizio:</label>
-  <input type="text" [(ngModel)]="nuovaEsperienza.dataInizio" name="dataInizio" id="dataInizio">
+    <div id="form-content" class="col-md-8">
 
-  <label for="dataFine">Data Fine:</label>
-  <input type="text" [(ngModel)]="nuovaEsperienza.dataFine" name="dataFine" id="dataFine">
-  
-  <label for="ora">Ora:</label>
-  <input type="text" [(ngModel)]="nuovaEsperienza.ora" name="ora" id="ora">
-  
-  <label for="durata">Durata:</label>
-  <input type="text" [(ngModel)]="nuovaEsperienza.durata" name="durata" id="durata">
+      <form (ngSubmit)="creaEsperienza()" class="experience-form"> 
 
-  <label for="programma">Programma:</label>
-  <textarea [(ngModel)]="nuovaEsperienza.programma" name="programma" id="programma"></textarea>
-  
-  <label for="prezzo">Prezzo:</label>
-  <input type="text" [(ngModel)]="nuovaEsperienza.prezzo" name="prezzo" id="prezzo">
-  
-  <label for="postiEsperienza">Posti Esperienza:</label>
-  <input type="text" [(ngModel)]="nuovaEsperienza.postiEsperienza" name="postiEsperienza" id="postiEsperienza">
-  
-  <label for="puntiEsperienza">Punti Esperienza:</label>
-  <input type="text" [(ngModel)]="nuovaEsperienza.puntiEsperienza" name="puntiEsperienza" id="puntiEsperienza">
-  
-  <label for="categoria">Categoria:</label>
-  <input type="text" [(ngModel)]="nuovaEsperienza.categoria" name="categoria" id="categoria">
+        <div class="row form-group">
+          <div class="col-sm-3">
+            <label for="titolo">Titolo:</label>
+          </div>
+          <div class="input-group col-sm-9">
+            <input type="text" [(ngModel)]="nuovaEsperienza.titolo" name="titolo" id="titolo" placeholder="Inserisci il titolo" class="form-control" required>
+          </div>
+        </div>
 
-  <!-- Per il caricamento di foto -->
-  <label for="foto">Carica Foto:</label>
-  <input type="file" (change)="gestisciFotoSelezionate($event)" id="foto" accept="foto/*" multiple>
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label for="descrizione">Descrizione:</label>
+          </div>
+          <div class="input-group col-sm-9">
+            
+            <textarea [(ngModel)]="nuovaEsperienza.descrizione" name="descrizione" id="descrizione" placeholder="Inserisci la descrizione" class="form-control" required></textarea>
+          </div>
+        </div>
 
-  <!-- Per il caricamento di video -->
-  <label for="video">Carica Video:</label>
-  <input type="file" (change)="gestisciVideoSelezionati($event)" id="video" accept="video/*" multiple>
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label for="luogo">Luogo:</label>
+          </div>
+          <div class="input-group col-sm-9">
+            
+            <input type="text" [(ngModel)]="nuovaEsperienza.luogo" name="luogo" id="luogo" placeholder="Inserisci il luogo" class="form-control" required>
+          </div>
+        </div>
 
-  <button type="submit" class="submit-button">Crea Esperienza</button>
-</form>
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label for="dataInizio">Data Inizio:</label>
+          </div>
+          <div class="input-group col-sm-9">
+            
+            <input type="text" [(ngModel)]="nuovaEsperienza.dataInizio" name="dataInizio" id="dataInizio" placeholder="Inserisci data" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label for="dataInizio">Data Fine:</label>
+          </div>
+          <div class="input-group col-sm-9">
+            
+            <input type="text" [(ngModel)]="nuovaEsperienza.dataFine" name="dataFine" id="dataFine" placeholder="Inserisci data" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label for="ora">Ora:</label>
+          </div>
+          <div class="input-group col-sm-9">
+            
+            <input type="text" [(ngModel)]="nuovaEsperienza.ora" name="ora" id="ora" placeholder="Inserisci ora" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label for="durata">Durata:</label>
+          </div>
+          <div class="input-group col-sm-9">
+            
+            <input type="text" [(ngModel)]="nuovaEsperienza.durata" name="durata" id="durata" placeholder="Inserisci durata" class="form-control" required>
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label for="programma">Programma:</label>
+          </div>
+          <div class="input-group col-sm-9">
+            
+            <textarea [(ngModel)]="nuovaEsperienza.programma" name="programma" id="programma" placeholder="Inserisci programma" class="form-control" required></textarea>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label for="prezzo">Prezzo:</label>
+          </div>
+          <div class="input-group col-sm-9">
+            
+            <input type="text" [(ngModel)]="nuovaEsperienza.prezzo" name="prezzo" id="prezzo" placeholder="Inserisci prezzo" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label for="postiEsperienza">Posti Esperienza:</label>
+          </div>
+          <div class="input-group col-sm-9">
+            
+            <input type="text" [(ngModel)]="nuovaEsperienza.postiEsperienza" name="postiEsperienza" id="postiEsperienza" placeholder="Inserisci posti" class="form-control" required>
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label for="puntiEsperienza">Punti Esperienza:</label>
+          </div>
+          <div class="input-group col-sm-9">
+            
+            <input type="text" [(ngModel)]="nuovaEsperienza.puntiEsperienza" name="puntiEsperienza" id="puntiEsperienza" placeholder="Inserisci punti" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label for="categoria">Categoria:</label>
+          </div>
+          <div class="input-group col-sm-9">
+            
+            <input type="text" [(ngModel)]="nuovaEsperienza.categoria" name="categoria" id="categoria" placeholder="Inserisci categoria" class="form-control" required>
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <div class="col-sm-12 submit-button">
+            <button type="submit" id="submit" class="btn" aria-pressed="true">Submit Form</button>
+          </div>
+        </div>
+
+      </form> 
+      <div class="row">
+        <div class="col-sm-12">
+          <p>{{ messaggio }}</p>
+        </div>
+      </div>
+    </div> 
+
+  </div> 
+</div>

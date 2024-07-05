@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataServiceService } from 'src/app/service/data-service.service';
 import { EsperienzaServiceService } from 'src/app/service/esperienza-service.service';
 import { PrenotazioneService } from 'src/app/service/prenotazione.service';
@@ -20,15 +20,15 @@ export class EsperienzaDetailsComponent implements OnInit {
   prenotazione: any[] = [];
   recensioni: any[] = [];
   esperienzaId: number | undefined;
-
+  users: { username: string }[] = [];
   selectedEsperienza: any;
 
   date: string | undefined;
-  esperienza: any; // Oggetto dell'esperienza corrente
-  selectedDate: Date = new Date(); // Data selezionata
-  selectedTime: string = ''; // Ora selezionata
+  esperienza: any;
+  selectedDate: Date = new Date(); 
+  selectedTime: string = '';
   postiDaPrenotare: number | undefined;
-  errorMessage: string | undefined; // Eventuale messaggio di errore
+  errorMessage: string | undefined; 
   successMessage: string | undefined;
 
   recensione = {
@@ -37,12 +37,14 @@ export class EsperienzaDetailsComponent implements OnInit {
   };
   startDate: any;
   hoveredRating: number | null = null;
+ 
 
   constructor(
     private route: ActivatedRoute,
     private dataService: DataServiceService,
     private prenotazioneSrv: PrenotazioneService,
-    private esperienzaSrv: EsperienzaServiceService
+    private esperienzaSrv: EsperienzaServiceService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -67,7 +69,7 @@ export class EsperienzaDetailsComponent implements OnInit {
     });
   }
 
-  // Metodo per caricare la guida associata all'esperienza
+  
   caricaGuida(esperienzaId: number): void {
     this.esperienzaSrv.getGuidaByEsperienzaId(esperienzaId).subscribe(
       (data) => {
@@ -82,12 +84,12 @@ export class EsperienzaDetailsComponent implements OnInit {
     );
   }
 
-  // Metodo per formattare la data se necessario
+  
   private formatDate(date: Date): string {
     return date.toISOString(); 
   }
 
-  // Metodo per creare una recensione per l'esperienza
+  
   creaRecensione(esperienzaId: number, recensione: any): void {
     this.dataService.createRecensione(esperienzaId, recensione).subscribe(
       (response) => {
@@ -100,27 +102,27 @@ export class EsperienzaDetailsComponent implements OnInit {
     );
   }
 
-  // Metodo per prenotare l'esperienza
+ 
   prenotaEsperienza(): void {
     if (!this.selectedDate || !this.selectedTime || !this.postiDaPrenotare) {
       this.errorMessage = 'Per favore, completa tutti i campi.';
       return;
     }
 
-    // Crea un oggetto Date dalla stringa selectedDate
+   
     const dateObj = new Date(this.selectedDate);
 
-    // Verifica che la data sia valida
+    
     if (isNaN(dateObj.getTime())) {
       this.errorMessage = 'Data non valida.';
       return;
     }
 
     const prenotazione = {
-      data: dateObj.toISOString().substring(0, 10), // Converte la data in formato ISO yyyy-mm-dd
+      data: dateObj.toISOString().substring(0, 10), 
       ora: this.selectedTime,
       postiPrenotati: this.postiDaPrenotare,
-      dataPrenotazione: new Date().toISOString(), // Inizializza la data di prenotazione in formato ISO
+      dataPrenotazione: new Date().toISOString(), 
     };
 
     this.prenotazioneSrv
@@ -176,4 +178,9 @@ export class EsperienzaDetailsComponent implements OnInit {
   resetTemporaryRating() {
     this.hoveredRating = null;
   }
+
+  goToChat(): void {
+    this.router.navigate(['/private-chat', this.users]);
+  }
+  
 }

@@ -6,9 +6,8 @@
     <h1 class="text-center mb-4 mt-4">Preferiti</h1>
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-md-4 mb-4" *ngFor="let favorito of favoriti">
-                <div class="card text-center"
-                    style="width: 18rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+            <div class="col-12 col-md-6 col-lg-4 mb-4" *ngFor="let favorito of favoriti">
+                <div class="card text-center mx-auto" style="width: 18rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
                     <img src="{{ favorito.esperienza.foto[0] }}" class="card-img-top" alt="Experience"
                         style="border-top-left-radius: 10px; border-top-right-radius: 10px;"
                         [routerLink]="['/dettaglio-esperienza', favorito.esperienza.id]">
@@ -20,8 +19,7 @@
                             <span class="fw-bold ms-1">3.9</span>
                             <span class="text-muted ms-1">· 11 Ratings</span>
                         </div>
-                        <p class="card-text text-muted"><i class="bi bi-geo-alt"></i> {{ favorito.esperienza.luogo }}
-                        </p>
+                        <p class="card-text text-muted"><i class="bi bi-geo-alt"></i> {{ favorito.esperienza.luogo }}</p>
                         <button class="btn btn-danger" (click)="rimuoviDaPreferiti(favorito.esperienza.id)">Rimuovi dai preferiti</button>
                     </div>
                 </div>

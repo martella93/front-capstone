@@ -1,0 +1,12 @@
+
+    <h2>Chat con {{recipient}}</h2>
+    <div class="messages">
+      <div *ngFor="let message of messages | async">
+        <p><strong>{{message.sender}}:</strong> {{message.content}}</p>
+        <button *ngIf="message.sender === username" (click)="deleteMessage(message)">Elimina</button>
+      </div>
+    </div>
+    <input [(ngModel)]="newMessage" placeholder="Scrivi un messaggio..." />
+    <button (click)="sendMessage()">Invia</button>
+ 
+  

@@ -43,11 +43,6 @@ export class EsperienzaServiceService {
     });
   }
 
-  uploadFotoEsperienza(id: number, foto: File[]): Observable<string> {
-    const formData = new FormData();
-    foto.forEach((file) => formData.append('foto', file));
-    return this.http.patch<string>(`${this.apiUrl}/${id}/upload-foto`, formData);
-  }
 
   uploadVideoEsperienza(id: number, video: File[]): Observable<string> {
     const url = `${this.apiUrl}/${id}/upload-video`;
@@ -61,9 +56,18 @@ export class EsperienzaServiceService {
       .patch<string>(url, formData, { headers })
       .pipe(catchError(this.handleError));
   }
+  
   getGuidaByEsperienzaId(esperienzaId: number): Observable<any> {
     return this.http.get<any>(
       `${this.apiUrl}/${esperienzaId}/guida`
     );
+  }
+
+  uploadFotoEsperienza(id: number, foto: File[]): Observable<string> {
+    const formData = new FormData();
+    for (let i = 0; i < foto.length; i++) {
+      formData.append('foto', foto[i]);
+    }
+    return this.http.patch<string>(`${this.apiUrl}/${id}/upload-foto`, formData, {responseType: 'text' as 'json',});
   }
 }

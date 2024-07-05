@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class PrenotazioneService {
 
-  private apiUrl = 'http://localhost:8080/api'; // Assicurati di sostituire con il tuo URL di base
+  private apiUrl = 'http://localhost:8080/api'; 
 
   constructor(private http: HttpClient) {}
 

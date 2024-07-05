@@ -1,34 +1,38 @@
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-md-4 mb-4" *ngFor="let esperienza of esperienze">
-      <div class="card" style="width: 22rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
-        <div class="position-absolute top-0 end-0 m-2">
-          <i class="bi"
-   [ngClass]="{
-     'bi-bookmark': !isPreferito(esperienza),
-     'bi-bookmark-fill': isPreferito(esperienza),
-     'favorite': isPreferito(esperienza)
-   }"
-   (click)="togglePreferito(esperienza)"
-   style="font-size: 1.5em; color: #fff; text-shadow: 0 0 5px rgba(0,0,0,0.5); cursor: pointer;">
-</i>
-        </div>
-        <img src="{{ esperienza.foto[0] }}" class="card-img-top" alt="Experience"
-          style="border-top-left-radius: 10px; border-top-right-radius: 10px;"
-          [routerLink]="['/dettaglio-esperienza', esperienza.id]">
-        <div class="card-body">
-          <p class="card-text text-muted mb-2">From ${{esperienza.prezzo}}</p>
-          <h5 class="card-title">{{esperienza.titolo}}</h5>
-          <div class="d-flex align-items-center mb-2">
-            <span class="text-warning" style="font-size: 1.2em;">★</span>
-            <span class="fw-bold ms-1">3.9</span>
-            <span class="text-muted ms-1">· 11 Ratings</span>
+<div class="card-section">
+  <div class="all-card">
+    <div class="row justify-content-center">
+      <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let esperienza of esperienze">
+        <div class="card mt-5 card-luca">
+          <div class="card-header position-relative">
+            <i class="bi favorite-icon" [ngClass]="{
+                      'bi-bookmark': !isPreferito(esperienza),
+                      'bi-bookmark-fill': isPreferito(esperienza),
+                      'favorite': isPreferito(esperienza)
+                    }" (click)="togglePreferito(esperienza)">
+            </i>
+            <img src="{{ esperienza.foto[0] }}" class="card-img-top" alt="Experience"
+              [routerLink]="['/dettaglio-esperienza', esperienza.id]">
           </div>
-          <p class="card-text text-muted"><i class="bi bi-geo-alt"></i>{{esperienza.luogo}}</p>
+          <div class="card-body mt-4">
+            <div class="price">
+              <p>from <span> ${{esperienza.prezzo}}</span></p>
+            </div>
+            <div class="content" [routerLink]="['/dettaglio-esperienza', esperienza.id]">
+              <p>{{esperienza.titolo}}</p>
+            </div>
+            <div class="rating">
+              <div class="star mt-2">
+                ★ <span class="total">3.9 </span><span class="total-ratings text-muted">11 ratings</span>
+              </div>
+            </div>
+            <div class="location">
+              <div class="icon">
+                <p class="card-text text-muted"><i class="bi bi-geo-alt"></i>{{esperienza.luogo}}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-

@@ -43,14 +43,6 @@ private localhost = 'http://localhost:8080';
     return this.http.delete<string>(`${this.localhost}/api/favoriti/remove/${id}`, { responseType: 'text' as 'json' });
   }
 
-  uploadFotoEsperienza(id: number, foto: File[]): Observable<any> {
-    const formData = new FormData();
-    for (let i = 0; i < foto.length; i++) {
-      formData.append('foto', foto[i]);
-    }
-    return this.http.patch(`${this.localhost}/api/esperienze/${id}/upload-foto`, formData);
-  }
-
   createRecensione(esperienzaId: number, recensione: any): Observable<string> {
     return this.http.post<string>(`${this.localhost}/api/recensione/${esperienzaId}`, recensione, { responseType: 'text' as 'json' });
   }

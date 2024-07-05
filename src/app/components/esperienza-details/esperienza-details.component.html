@@ -1,7 +1,7 @@
 <div *ngIf="esperienza">
-  <div class="container mt-5">
+  <div class="container mt-5 mb-5">
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-12 col-lg-8 mb-4">
         <div class="card" style="border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
           <div id="experienceCarousel{{esperienza.id}}" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
@@ -13,7 +13,7 @@
             <div class="carousel-inner">
               <div *ngFor="let image of esperienza.foto; let i = index" class="carousel-item" [class.active]="i === 0">
                 <img [src]="image" class="d-block w-100" alt="Experience Image {{ i + 1 }}"
-                  style="border-top-left-radius: 10px; border-top-right-radius: 10px; height: 600px;">
+                  style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
               </div>
             </div>
             <button class="carousel-control-prev" type="button"
@@ -67,7 +67,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-8 recensione">
+          <div class="col-12 col-md-8 recensione">
             <div class="card mt-4" style="border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
               <div class="card-body">
                 <h5 class="card-title mb-4">Lascia una Recensione</h5>
@@ -97,9 +97,9 @@
       </div>
 
 
-      <div class="col-md-4">
+      <div class="col-12 col-lg-4">
         <!-- Card della guida -->
-        <div class="card" style="border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+        <div class="card mb-4" style="border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
           <div class="card-body text-center">
             <h5 class="card-title">Ciao sono {{guida.nome}}</h5>
             <p class="card-text">{{guida.descrizione}}</p>
@@ -110,9 +110,9 @@
             </button>
           </div>
         </div>
-       <app-guida></app-guida>
+        <app-guida></app-guida>
         <!-- Selezione data e ospiti -->
-        <div class="card mt-4" style="border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+        <div class="card mb-4" style="border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
           <div class="card-body">
             <h5 class="card-title">Select Date and Tickets</h5>
             <div class="mb-3">
@@ -147,6 +147,9 @@
               <div *ngIf="errorMessage" class="alert alert-danger mt-3">
                 {{ errorMessage }}
               </div>
+              <div *ngIf="successMessage" class="alert alert-success mt-3">
+                {{ successMessage }}
+              </div>
 
               <button type="submit" class="btn btn-primary">Prenota</button>
             </form>
@@ -154,7 +157,7 @@
         </div>
 
         <!-- Sezione delle recensioni -->
-        <div class="card mt-4" style="border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+        <div class="card mb-4" style="border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
           <div class="card-body">
             <h5 class="card-title">Recensioni</h5>
             <div *ngIf="recensioni.length > 0; else noRecensioni">
@@ -175,7 +178,8 @@
                   <strong>{{ recensione.titolo }}</strong>
                 </div>
                 <p>'{{ recensione.commento }}'</p>
-                <button class="badge bg-warning text-dark w-25">Contattami</button>
+
+                <button class="badge bg-warning text-dark w-25" (click)="goToChat()">Contattami</button>
                 <hr>
               </div>
             </div>
@@ -184,7 +188,7 @@
             </ng-template>
           </div>
         </div>
-        
+
 
 
       </div>

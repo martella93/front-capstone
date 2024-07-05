@@ -12,10 +12,8 @@ export class HomeComponent {
   searchTerm: any;
   filteredEsperienze: any[] = [];
   esperienze: any[] = [];
-  favoriti: number[] = [];
-  userId: number | null | undefined;
- 
 
+ 
   constructor(
     private authSrv: AuthService,
     private dataService: DataServiceService,
@@ -24,6 +22,12 @@ export class HomeComponent {
 
   ngOnInit(): void {
     this.caricaEsperienze();
+  }
+  focusSearchBar() {
+    const searchBar = document.getElementById('search-bar');
+    if (searchBar) {
+      searchBar.focus();
+    }
   }
 
   isLoggedIn(): boolean {
@@ -36,7 +40,6 @@ export class HomeComponent {
   }
 
   onSearchInput(): void {
-    // Se il campo di ricerca è vuoto, ripristiniamo tutte le esperienze
     if (this.searchTerm.trim() === '') {
       this.filteredEsperienze = this.esperienze;
     }
@@ -69,5 +72,5 @@ export class HomeComponent {
     );
   }
 
-  
+
 }

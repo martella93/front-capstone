@@ -1,0 +1,73 @@
+.jumbotron {
+    background: url('https://cdn.pixabay.com/photo/2023/10/21/11/46/sunset-8331285_960_720.jpg') no-repeat center center;
+    background-size: cover;
+    height: 80vh;
+    color: white;
+    position: relative;
+}
+
+.jumbotron-content {
+    position: absolute;
+    margin-top: 70px;
+    margin-left: 20px;
+    text-align: left;
+    line-height: 45px;
+}
+
+.jumbotron-content h1 {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    line-height: 82px;
+}
+
+.highlight {
+    color: #FFD700;
+}
+
+.jumbotron-content p {
+    margin-top: 50px;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+
+@media screen and (max-width: 768px) {
+    
+    .jumbotron{
+        height: 70vh;
+    }
+
+    .jumbotron-content {
+        padding: 0 20px; 
+    }
+    
+    .jumbotron-content h1 {
+        font-size: 3.5rem;
+        line-height: 60px;
+    }
+    
+    .jumbotron-content p {
+        font-size: 1.5rem; 
+        line-height: 30px;
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+    .jumbotron {
+        height: 65vh; 
+    }
+    
+    .jumbotron-content {
+        padding: 0 20px; 
+    }
+    
+    .jumbotron-content h1 {
+        font-size: 4.5rem; 
+        line-height: 80px;
+    }
+    
+    .jumbotron-content p {
+        font-size: 1.5rem; 
+        line-height: 50px;
+    }
+}

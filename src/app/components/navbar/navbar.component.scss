@@ -13,6 +13,11 @@ body {
     border-bottom: 1px solid #ddd;
     position: relative;
     height: 8vh;
+    position: sticky;
+    top: 0;
+    z-index: 1000; 
+    background-color: transparent; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
     
 }
 
@@ -63,7 +68,7 @@ body {
 .dropdown-menu {
     display: none;
     position: absolute;
-    right: 0; /* Aggiungi questa linea per far sì che il menu a tendina si allinei a destra */
+    right: 0; 
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -85,15 +90,17 @@ body {
     background-color: #f1f1f1;
 }
 .menu-arrow {
-    font-size: 1.2rem; /* Dimensione dell'icona della freccia */
-    margin-left: 0.1rem; /* Spazio tra l'icona del profilo e l'icona della freccia */
-    transition: transform 0.3s ease; /* Animazione di rotazione */
+    font-size: 1.2rem; 
+    margin-left: 0.1rem; 
+    transition: transform 0.3s ease; 
   }
   
   .rotate {
-    transform: rotate(180deg); /* Ruota la freccia quando il menu è aperto */
+    transform: rotate(180deg); 
   }
   .menu-container:hover .menu-arrow {
-    color: #007bff; /* Colore della freccia al passaggio del mouse */
+    color: #007bff; 
   }
   
+
+

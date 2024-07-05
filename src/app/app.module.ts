@@ -21,13 +21,23 @@ import { CreaEsperienzaComponent } from './components/crea-esperienza/crea-esper
 import { ModificaEsperienzaComponent } from './components/modifica-esperienza/modifica-esperienza.component';
 import { PrenotazioniComponent } from './components/prenotazioni/prenotazioni.component';
 import { ProfiloComponent } from './components/profilo/profilo.component';
+import { PrivateChatComponent } from './components/private-chat/private-chat.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { environment } from '../environments/environment';
+
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FooterComponent } from './components/footer/footer.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { CommunityComponent } from './components/community/community.component';
+import { JumbotronComponent } from './jumbotron/jumbotron.component';
+
+
 
 const routes: Route[] = [
   { path: '', component: HomeComponent },
@@ -40,6 +50,9 @@ const routes: Route[] = [
   { path: 'crea-esperienza', component: CreaEsperienzaComponent},
   { path: 'modifica-esperienza', component: ModificaEsperienzaComponent},
   { path: 'prenotazioni', component: PrenotazioniComponent},
+  { path: 'community', component: CommunityComponent},
+  { path: 'private-chat', component: PrivateChatComponent },
+  
 ];
 
 @NgModule({
@@ -57,9 +70,12 @@ const routes: Route[] = [
     ModificaEsperienzaComponent,
     PrenotazioniComponent,
     ProfiloComponent,
-    FooterComponent, 
-    
-    
+    FooterComponent,
+    ChatComponent,
+    CommunityComponent,
+    PrivateChatComponent,
+    JumbotronComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -73,7 +89,9 @@ const routes: Route[] = [
     MatFormFieldModule,
     MatInputModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule
   ],
   providers: [
     AuthService, {

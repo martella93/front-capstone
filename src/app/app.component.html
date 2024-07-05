@@ -1,2 +1,6 @@
 <app-navbar></app-navbar>
+<div *ngIf="router.url === '/'">
+    <app-jumbotron></app-jumbotron>
+</div>
 <router-outlet></router-outlet>
+<app-footer></app-footer>

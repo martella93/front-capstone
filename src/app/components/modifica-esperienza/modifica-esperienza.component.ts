@@ -1,13 +1,15 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { DataServiceService } from 'src/app/service/data-service.service';
 import { EsperienzaServiceService } from 'src/app/service/esperienza-service.service';
+
+declare var bootstrap: any; 
 
 @Component({
   selector: 'app-modifica-esperienza',
   templateUrl: './modifica-esperienza.component.html',
   styleUrls: ['./modifica-esperienza.component.scss'],
 })
-export class ModificaEsperienzaComponent {
+export class ModificaEsperienzaComponent implements AfterViewInit {
   @Input() esperienze: any[] = [];
   esperienzaDaAggiornare: any = {
     titolo: '',
@@ -27,6 +29,9 @@ export class ModificaEsperienzaComponent {
   fileVideo: File[] = [];
   filteredEsperienze: any[] = [];
   esperienzaInModifica: any | null = null;
+  selectedExperience: any | null = null;
+
+  @ViewChild('infoModal') infoModal: ElementRef | undefined;
 
   constructor(
     private esperienzaService: EsperienzaServiceService,
@@ -35,6 +40,12 @@ export class ModificaEsperienzaComponent {
 
   ngOnInit(): void {
     this.caricaEsperienze();
+  }
+
+  ngAfterViewInit(): void {
+    if (!this.infoModal) {
+      console.error("infoModal is not defined");
+    }
   }
 
   private caricaEsperienze(): void {
@@ -65,11 +76,11 @@ export class ModificaEsperienzaComponent {
       (response) => {
         this.aggiornaEsperienza();
         console.log('Esperienza modificata con successo:', response);
-        // Gestisci la risposta dal server, se necessario
+       
       },
       (error) => {
         console.error("Errore durante la modifica dell'esperienza:", error);
-        // Gestisci l'errore, se necessario
+      
       }
     );
   }
@@ -95,10 +106,46 @@ export class ModificaEsperienzaComponent {
   }
 
   attivaModifica(esperienza: any): void {
-    this.esperienzaInModifica = { ...esperienza }; // Clona l'esperienza per evitare modifiche dirette
+    this.esperienzaInModifica = { ...esperienza }; 
   }
 
   annullaModifica(): void {
     this.esperienzaInModifica = null;
+  }
+
+  openModal(esperienza: any): void {
+    this.selectedExperience = esperienza;
+    if (this.infoModal) {
+      const modalElement = new bootstrap.Modal(this.infoModal.nativeElement);
+      modalElement.show();
+    } else {
+      console.error("infoModal is not defined");
+    }
+  }
+
+  handleFileInput(event: any): void {
+    const files: File[] = event.target.files;
+    for (let i = 0; i < files.length; i++) {
+      this.fileFoto.push(files[i]);
+    }
+  }
+
+  salvaNuovaFoto(): void {
+    if (this.selectedExperience && this.fileFoto.length > 0) {
+      this.esperienzaService.uploadFotoEsperienza(this.selectedExperience.id, this.fileFoto).subscribe(
+        (response) => {
+          console.log('Foto aggiunte con successo:', response);
+          this.aggiornaEsperienza(); 
+          this.fileFoto = []; 
+          const modalElement = new bootstrap.Modal(this.infoModal?.nativeElement);
+          modalElement.hide(); 
+        },
+        (error) => {
+          console.error("Errore durante il caricamento delle foto:", error);
+        }
+      );
+    } else {
+      console.error("Seleziona almeno una foto da caricare.");
+    }
   }
 }
